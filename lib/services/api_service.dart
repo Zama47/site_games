@@ -18,7 +18,7 @@ class ApiService {
       
       if (_useLocalData) {
         // Simulate network delay for loading animation
-        await Future.delayed(const Duration(seconds: 1));
+        await Future.delayed(const Duration(milliseconds: 500));
         jsonData = gamesSteamData;
       } else {
         final response = await http.get(
@@ -32,41 +32,42 @@ class ApiService {
         }
       }
       
-      List<Game> allGames = jsonData
-          .map((json) => Game.fromJson(json))
-          .where((game) => !game.isDeleted)
-          .toList();
-
-      final int startIndex = page * (limit ?? pageSize);
-      final int endIndex = startIndex + (limit ?? pageSize);
-
-        if (startIndex >= allGames.length) {
-          return [];
-        }
-
-        return allGames.sublist(
-          startIndex,
-          endIndex > allGames.length ? allGames.length : endIndex,
-        );
-    } catch (e) {
-      // Fallback to local data on error
-      final jsonData = gamesSteamData;
-      List<Game> allGames = jsonData
-          .map((json) => Game.fromJson(json))
-          .where((game) => !game.isDeleted)
-          .toList();
+      // Pagination: return 5 items per page
+      final startIndex = page * pageSize;
+      final endIndex = startIndex + pageSize;
       
-      final int startIndex = page * (limit ?? pageSize);
-      final int endIndex = startIndex + (limit ?? pageSize);
-
-      if (startIndex >= allGames.length) {
+      if (startIndex >= jsonData.length) {
+        return []; // No more data
+      }
+      
+      final paginatedData = jsonData.sublist(
+        startIndex,
+        endIndex > jsonData.length ? jsonData.length : endIndex,
+      );
+      
+      return paginatedData
+          .map((json) => Game.fromJson(json))
+          .where((game) => !game.isDeleted)
+          .toList();
+    } catch (e) {
+      // Fallback to local data on error with pagination
+      final jsonData = gamesSteamData;
+      final startIndex = page * pageSize;
+      final endIndex = startIndex + pageSize;
+      
+      if (startIndex >= jsonData.length) {
         return [];
       }
-
-      return allGames.sublist(
+      
+      final paginatedData = jsonData.sublist(
         startIndex,
-        endIndex > allGames.length ? allGames.length : endIndex,
+        endIndex > jsonData.length ? jsonData.length : endIndex,
       );
+      
+      return paginatedData
+          .map((json) => Game.fromJson(json))
+          .where((game) => !game.isDeleted)
+          .toList();
     }
   }
 

@@ -74,16 +74,17 @@ class _GameDetailScreenNewState extends State<GameDetailScreenNew>
                   children: [
                     CachedNetworkImage(
                       imageUrl: widget.game.imageUrl,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
+                      alignment: Alignment.topCenter,
                       placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(),
                       ),
                       errorWidget: (context, url, error) => Container(
-                        color: Colors.grey.shade800,
-                        child: const Icon(
+                        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                        child: Icon(
                           Icons.videogame_asset,
                           size: 80,
-                          color: Colors.white54,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ),
@@ -156,7 +157,7 @@ class _GameDetailScreenNewState extends State<GameDetailScreenNew>
                             children: [
                               Text(
                                 widget.game.title,
-                                style: AppStyles.headlineStyle.copyWith(
+                                style: AppStyles.headlineStyle(context).copyWith(
                                   fontSize: 28,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -418,7 +419,6 @@ class _GameDetailScreenNewState extends State<GameDetailScreenNew>
                                   horizontal: AppStyles.paddingSmall,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.black,
                                   borderRadius: BorderRadius.circular(
                                     AppStyles.radiusMedium,
                                   ),
@@ -428,25 +428,23 @@ class _GameDetailScreenNewState extends State<GameDetailScreenNew>
                                   borderRadius: BorderRadius.circular(
                                     AppStyles.radiusMedium,
                                   ),
-                                  child: AspectRatio(
-                                    aspectRatio: 16 / 9,
-                                    child: CachedNetworkImage(
-                                      imageUrl: screenshot,
-                                      fit: BoxFit.contain,
-                                      placeholder: (context, url) => Container(
-                                        color: Colors.grey.shade900,
-                                        child: const Center(
-                                          child: CircularProgressIndicator(),
-                                        ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: screenshot,
+                                    fit: BoxFit.contain,
+                                    alignment: Alignment.center,
+                                    width: double.infinity,
+                                    placeholder: (context, url) => Container(
+                                      color: Colors.grey.shade300,
+                                      child: const Center(
+                                        child: CircularProgressIndicator(),
                                       ),
-                                      errorWidget: (context, url, error) =>
-                                          Container(
-                                        color: Colors.grey.shade900,
-                                        child: const Icon(
-                                          Icons.image_not_supported,
-                                          size: 50,
-                                          color: Colors.white54,
-                                        ),
+                                    ),
+                                    errorWidget: (context, url, error) =>
+                                        Container(
+                                      color: Colors.grey.shade300,
+                                      child: const Icon(
+                                        Icons.image_not_supported,
+                                        size: 50,
                                       ),
                                     ),
                                   ),
@@ -487,7 +485,7 @@ class _GameDetailScreenNewState extends State<GameDetailScreenNew>
                     Container(
                       padding: const EdgeInsets.all(AppStyles.paddingLarge),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.surface,
                         borderRadius: BorderRadius.circular(
                           AppStyles.radiusMedium,
                         ),
@@ -495,7 +493,7 @@ class _GameDetailScreenNewState extends State<GameDetailScreenNew>
                       ),
                       child: Text(
                         widget.game.description,
-                        style: AppStyles.bodyStyle.copyWith(
+                        style: AppStyles.bodyStyle(context).copyWith(
                           height: 1.6,
                           fontSize: 15,
                         ),
@@ -596,7 +594,7 @@ class _GameDetailScreenNewState extends State<GameDetailScreenNew>
                                     if (userRating != null)
                                       Text(
                                         'Ваша оценка: ${userRating.toInt()}/10',
-                                        style: AppStyles.subtitleStyle.copyWith(
+                                        style: AppStyles.subtitleStyle(context).copyWith(
                                           color: AppStyles.primaryColor,
                                         ),
                                       ),
@@ -644,7 +642,7 @@ class _GameDetailScreenNewState extends State<GameDetailScreenNew>
                         );
                       },
                       backgroundColor:
-                          isFavorite ? AppStyles.accentColor : Colors.white,
+                          isFavorite ? AppStyles.accentColor : Theme.of(context).colorScheme.surface,
                       icon: Icon(
                         isFavorite ? Icons.favorite : Icons.favorite_border,
                         color: isFavorite ? Colors.white : AppStyles.accentColor,
@@ -692,7 +690,7 @@ class _GameDetailScreenNewState extends State<GameDetailScreenNew>
       width: 140,
       padding: const EdgeInsets.all(AppStyles.paddingMedium),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(AppStyles.radiusMedium),
         boxShadow: [
           BoxShadow(
@@ -708,13 +706,13 @@ class _GameDetailScreenNewState extends State<GameDetailScreenNew>
           const SizedBox(height: AppStyles.paddingSmall),
           Text(
             label,
-            style: AppStyles.captionStyle,
+            style: AppStyles.captionStyle(context),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 4),
           Text(
             value,
-            style: AppStyles.bodyStyle.copyWith(
+            style: AppStyles.bodyStyle(context).copyWith(
               fontWeight: FontWeight.w600,
             ),
             textAlign: TextAlign.center,
@@ -740,7 +738,7 @@ class _GameDetailScreenNewState extends State<GameDetailScreenNew>
         const SizedBox(width: AppStyles.paddingSmall),
         Text(
           title,
-          style: AppStyles.titleStyle.copyWith(
+          style: AppStyles.titleStyle(context).copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),

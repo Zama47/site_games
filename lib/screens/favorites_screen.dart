@@ -49,14 +49,14 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   const SizedBox(height: AppStyles.paddingLarge),
                   Text(
                     'Нет избранных игр',
-                    style: AppStyles.subtitleStyle.copyWith(
+                    style: AppStyles.subtitleStyle(context).copyWith(
                       color: AppStyles.textLightColor,
                     ),
                   ),
                   const SizedBox(height: AppStyles.paddingSmall),
                   Text(
                     'Добавляйте игры в избранное,\nнажимая на сердечко',
-                    style: AppStyles.captionStyle,
+                    style: AppStyles.captionStyle(context),
                     textAlign: TextAlign.center,
                   ),
                 ],

@@ -73,14 +73,14 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   const SizedBox(height: AppStyles.paddingLarge),
                   Text(
                     'Нет уведомлений',
-                    style: AppStyles.subtitleStyle.copyWith(
+                    style: AppStyles.subtitleStyle(context).copyWith(
                       color: AppStyles.textLightColor,
                     ),
                   ),
                   const SizedBox(height: AppStyles.paddingSmall),
                   Text(
                     'Здесь будут появляться уведомления\nо действиях игроков',
-                    style: AppStyles.captionStyle,
+                    style: AppStyles.captionStyle(context),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -120,7 +120,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     height: 48,
                     decoration: BoxDecoration(
                       color: isRead
-                          ? Colors.grey.shade200
+                          ? Theme.of(context).colorScheme.surfaceContainerHighest
                           : AppStyles.primaryColor.withOpacity(0.1),
                       shape: BoxShape.circle,
                     ),
@@ -131,13 +131,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   ),
                   title: Text(
                     notification['message'] as String,
-                    style: AppStyles.bodyStyle.copyWith(
+                    style: AppStyles.bodyStyle(context).copyWith(
                       fontWeight: isRead ? FontWeight.normal : FontWeight.bold,
                     ),
                   ),
                   subtitle: Text(
                     _formatTimestamp(timestamp),
-                    style: AppStyles.captionStyle,
+                    style: AppStyles.captionStyle(context),
                   ),
                   trailing: isRead
                       ? null

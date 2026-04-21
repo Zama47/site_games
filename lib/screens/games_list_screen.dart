@@ -26,6 +26,7 @@ class _GamesListScreenState extends State<GamesListScreen> {
     super.initState();
     _scrollController.addListener(_onScroll);
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Force refresh to load updated game data with screenshots
       context.read<GamesProvider>().loadGames(refresh: true);
       context.read<NotificationsProvider>().loadNotifications();
     });
@@ -39,10 +40,7 @@ class _GamesListScreenState extends State<GamesListScreen> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.pixels >=
-        _scrollController.position.maxScrollExtent - 200) {
-      context.read<GamesProvider>().loadMore();
-    }
+    // All games loaded at once - no pagination needed
   }
 
   @override
@@ -150,12 +148,12 @@ class _GamesListScreenState extends State<GamesListScreen> {
                         const SizedBox(height: AppStyles.paddingMedium),
                         Text(
                           'Ошибка загрузки',
-                          style: AppStyles.subtitleStyle,
+                          style: AppStyles.subtitleStyle(context),
                         ),
                         const SizedBox(height: AppStyles.paddingSmall),
                         Text(
                           gamesProvider.error!,
-                          style: AppStyles.captionStyle,
+                          style: AppStyles.captionStyle(context),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: AppStyles.paddingLarge),
@@ -183,7 +181,7 @@ class _GamesListScreenState extends State<GamesListScreen> {
                         const SizedBox(height: AppStyles.paddingMedium),
                         Text(
                           'Игры не найдены',
-                          style: AppStyles.subtitleStyle.copyWith(
+                          style: AppStyles.subtitleStyle(context).copyWith(
                             color: AppStyles.textLightColor,
                           ),
                         ),
@@ -194,18 +192,29 @@ class _GamesListScreenState extends State<GamesListScreen> {
 
                 return ListView.builder(
                   controller: _scrollController,
-                  itemCount: gamesProvider.games.length +
-                      (gamesProvider.isLoadingMore ? 1 : 0),
+                  itemCount: gamesProvider.games.length + (gamesProvider.hasMoreData ? 1 : 0),
                   itemBuilder: (context, index) {
+                    // Load more button at the end
                     if (index == gamesProvider.games.length) {
-                      return const Padding(
-                        padding: EdgeInsets.all(AppStyles.paddingMedium),
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
+                      return Padding(
+                        padding: const EdgeInsets.all(AppStyles.paddingMedium),
+                        child: gamesProvider.isLoadingMore
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : ElevatedButton.icon(
+                                onPressed: () {
+                                  gamesProvider.loadMore();
+                                },
+                                icon: const Icon(Icons.expand_more),
+                                label: const Text('Загрузить еще'),
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: const Size(double.infinity, 50),
+                                ),
+                              ),
                       );
                     }
-
+                    
                     final game = gamesProvider.games[index];
                     return FutureBuilder<bool>(
                       future: gamesProvider.isFavorite(game.id),
@@ -270,12 +279,12 @@ class _GamesListScreenState extends State<GamesListScreen> {
                     const SizedBox(height: AppStyles.paddingLarge),
                     Text(
                       'Фильтры',
-                      style: AppStyles.headlineStyle,
+                      style: AppStyles.headlineStyle(context),
                     ),
                     const SizedBox(height: AppStyles.paddingLarge),
                     Text(
                       'Жанры (выберите несколько)',
-                      style: AppStyles.subtitleStyle,
+                      style: AppStyles.subtitleStyle(context),
                     ),
                     const SizedBox(height: AppStyles.paddingSmall),
                     Consumer<GamesProvider>(
@@ -309,7 +318,7 @@ class _GamesListScreenState extends State<GamesListScreen> {
                     const SizedBox(height: AppStyles.paddingLarge),
                     Text(
                       'Сортировка (выберите одну)',
-                      style: AppStyles.subtitleStyle,
+                      style: AppStyles.subtitleStyle(context),
                     ),
                     const SizedBox(height: AppStyles.paddingSmall),
                     Consumer<GamesProvider>(

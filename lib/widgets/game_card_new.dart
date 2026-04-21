@@ -22,17 +22,18 @@ class GameCardNew extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: AppStyles.marginMedium,
         vertical: AppStyles.marginSmall,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(AppStyles.radiusLarge),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withOpacity(isDark ? 0.3 : 0.08),
             blurRadius: 20,
             offset: const Offset(0, 8),
             spreadRadius: -5,
@@ -66,16 +67,17 @@ class GameCardNew extends StatelessWidget {
                       imageUrl: game.imageUrl,
                       height: 200,
                       width: double.infinity,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
+                      alignment: Alignment.topCenter,
                       placeholder: (context, url) => Container(
                         height: 200,
-                        color: Colors.grey.shade300,
+                        color: Theme.of(context).colorScheme.surfaceContainerHighest,
                         child: const Center(child: CircularProgressIndicator()),
                       ),
                       errorWidget: (context, url, error) => Container(
                         height: 200,
-                        color: Colors.grey.shade800,
-                        child: const Icon(Icons.videogame_asset, size: 60, color: Colors.white54),
+                        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                        child: Icon(Icons.videogame_asset, size: 60, color: Theme.of(context).colorScheme.onSurfaceVariant),
                       ),
                     ),
                   ),
@@ -168,8 +170,10 @@ class GameCardNew extends StatelessWidget {
                         Expanded(
                           child: Text(
                             game.title,
-                            style: AppStyles.subtitleStyle.copyWith(fontSize: 18, fontWeight: FontWeight.bold),
-                            maxLines: 2,
+                            style: AppStyles.titleStyle(context).copyWith(
+                              fontSize: 18,
+                            ),
+                            maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -200,14 +204,14 @@ class GameCardNew extends StatelessWidget {
                         Expanded(
                           child: Text(
                             game.developer,
-                            style: AppStyles.captionStyle,
+                            style: AppStyles.captionStyle(context),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         Text(
                           _formatDate(game.releaseDate),
-                          style: AppStyles.captionStyle.copyWith(fontWeight: FontWeight.w500),
+                          style: AppStyles.captionStyle(context).copyWith(fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),

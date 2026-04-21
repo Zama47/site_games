@@ -90,14 +90,14 @@ class _LoginScreenState extends State<LoginScreen>
                           const SizedBox(height: AppStyles.paddingMedium),
                           Text(
                             'Game Studio Catalog',
-                            style: AppStyles.headlineStyle.copyWith(
+                            style: AppStyles.headlineStyle(context).copyWith(
                               color: AppStyles.primaryColor,
                             ),
                           ),
                           const SizedBox(height: AppStyles.paddingSmall),
                           Text(
                             'Войдите в систему',
-                            style: AppStyles.captionStyle,
+                            style: AppStyles.captionStyle(context),
                           ),
                           const SizedBox(height: AppStyles.paddingLarge),
                           TextFormField(
@@ -182,7 +182,7 @@ class _LoginScreenState extends State<LoginScreen>
                           Container(
                             padding: const EdgeInsets.all(AppStyles.paddingMedium),
                             decoration: BoxDecoration(
-                              color: Colors.grey.shade100,
+                              color: Theme.of(context).colorScheme.surfaceContainerHighest,
                               borderRadius: BorderRadius.circular(
                                 AppStyles.radiusMedium,
                               ),
@@ -191,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen>
                               children: [
                                 Text(
                                   'Демо-аккаунты:',
-                                  style: AppStyles.captionStyle.copyWith(
+                                  style: AppStyles.captionStyle(context).copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -237,7 +237,7 @@ class _LoginScreenState extends State<LoginScreen>
         ),
         child: Text(
           '$username / pass',
-          style: AppStyles.captionStyle.copyWith(
+          style: AppStyles.captionStyle(context).copyWith(
             color: AppStyles.primaryColor,
             fontWeight: FontWeight.w500,
           ),

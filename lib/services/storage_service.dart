@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../models/order.dart';
 
 class StorageService {
   static const String _favoritesKey = 'favorites';
@@ -7,6 +8,8 @@ class StorageService {
   static const String _notificationsKey = 'notifications';
   static const String _deletedGamesKey = 'deleted_games';
   static const String _customGamesKey = 'custom_games';
+  static const String _ordersKey = 'orders';
+  static const String _blockedUsersKey = 'blocked_users';
 
   static final StorageService _instance = StorageService._internal();
   factory StorageService() => _instance;
@@ -184,6 +187,84 @@ class StorageService {
   Future<int> getUnreadCount() async {
     final notifications = await getNotifications();
     return notifications.where((n) => n['read'] == false).length;
+  }
+
+  // Orders
+  Future<List<Order>> getOrders({String? userId, String? status}) async {
+    final prefs = await _prefs;
+    final String? ordersJson = prefs.getString(_ordersKey);
+    if (ordersJson != null) {
+      final List<dynamic> decoded = json.decode(ordersJson);
+      var orders = decoded.map((o) => Order.fromJson(o)).toList();
+      
+      if (userId != null) {
+        orders = orders.where((o) => o.userId == userId).toList();
+      }
+      if (status != null) {
+        orders = orders.where((o) => o.status == status).toList();
+      }
+      
+      return orders;
+    }
+    return [];
+  }
+
+  Future<void> saveOrder(Order order) async {
+    final prefs = await _prefs;
+    final orders = await getOrders();
+    orders.add(order);
+    await prefs.setString(_ordersKey, json.encode(orders.map((o) => o.toJson()).toList()));
+  }
+
+  Future<void> updateOrderStatus(int orderId, String status, {String? adminComment}) async {
+    final prefs = await _prefs;
+    final orders = await getOrders();
+    final index = orders.indexWhere((o) => o.id == orderId);
+    if (index >= 0) {
+      orders[index] = orders[index].copyWith(
+        status: status,
+        adminComment: adminComment,
+        processedAt: DateTime.now(),
+      );
+      await prefs.setString(_ordersKey, json.encode(orders.map((o) => o.toJson()).toList()));
+    }
+  }
+
+  Future<int> getPendingOrdersCount() async {
+    final orders = await getOrders(status: 'pending');
+    return orders.length;
+  }
+
+  // Blocked Users
+  Future<List<String>> getBlockedUsers() async {
+    final prefs = await _prefs;
+    final String? blockedJson = prefs.getString(_blockedUsersKey);
+    if (blockedJson != null) {
+      final List<dynamic> decoded = json.decode(blockedJson);
+      return decoded.cast<String>();
+    }
+    return [];
+  }
+
+  Future<void> blockUser(String userId) async {
+    final prefs = await _prefs;
+    final blocked = await getBlockedUsers();
+    if (!blocked.contains(userId)) {
+      blocked.add(userId);
+      await prefs.setString(_blockedUsersKey, json.encode(blocked));
+    }
+  }
+
+  Future<void> unblockUser(String userId) async {
+    final prefs = await _prefs;
+    final blocked = await getBlockedUsers();
+    blocked.remove(userId);
+    await prefs.setString(_blockedUsersKey, json.encode(blocked));
+  }
+
+  Future<bool> isUserBlocked(String userId) async {
+    final blocked = await getBlockedUsers();
+    return blocked.contains(userId);
   }
 
   // Clear all data

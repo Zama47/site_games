@@ -26,14 +26,15 @@ class GameDetailScreen extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
               background: CachedNetworkImage(
                 imageUrl: game.imageUrl,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
+                alignment: Alignment.topCenter,
                 placeholder: (context, url) => Container(
-                  color: Colors.grey.shade300,
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
                   child: const Center(child: CircularProgressIndicator()),
                 ),
                 errorWidget: (context, url, error) => Container(
-                  color: Colors.grey.shade300,
-                  child: const Icon(Icons.image_not_supported, size: 50),
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                  child: Icon(Icons.image_not_supported, size: 50, color: Theme.of(context).colorScheme.onSurfaceVariant),
                 ),
               ),
             ),
@@ -112,7 +113,7 @@ class GameDetailScreen extends StatelessWidget {
                         ),
                         child: Text(
                           game.genre,
-                          style: AppStyles.bodyStyle.copyWith(
+                          style: AppStyles.bodyStyle(context).copyWith(
                             color: AppStyles.primaryColor,
                             fontWeight: FontWeight.w600,
                           ),
@@ -165,19 +166,19 @@ class GameDetailScreen extends StatelessWidget {
                   const SizedBox(height: AppStyles.paddingLarge),
                   Text(
                     'Описание',
-                    style: AppStyles.subtitleStyle,
+                    style: AppStyles.subtitleStyle(context),
                   ),
                   const SizedBox(height: AppStyles.paddingSmall),
                   Text(
                     game.description,
-                    style: AppStyles.bodyStyle.copyWith(
+                    style: AppStyles.bodyStyle(context).copyWith(
                       height: 1.5,
                     ),
                   ),
                   const SizedBox(height: AppStyles.paddingLarge),
                   Text(
                     'Платформы',
-                    style: AppStyles.subtitleStyle,
+                    style: AppStyles.subtitleStyle(context),
                   ),
                   const SizedBox(height: AppStyles.paddingSmall),
                   Wrap(
@@ -186,7 +187,7 @@ class GameDetailScreen extends StatelessWidget {
                     children: game.platforms.map((platform) {
                       return Chip(
                         label: Text(platform),
-                        backgroundColor: Colors.grey.shade200,
+                        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
                       );
                     }).toList(),
                   ),
@@ -194,7 +195,7 @@ class GameDetailScreen extends StatelessWidget {
                     const SizedBox(height: AppStyles.paddingLarge),
                     Text(
                       'Ваша оценка',
-                      style: AppStyles.subtitleStyle,
+                      style: AppStyles.subtitleStyle(context),
                     ),
                     const SizedBox(height: AppStyles.paddingSmall),
                     Consumer<GamesProvider>(
@@ -223,7 +224,7 @@ class GameDetailScreen extends StatelessWidget {
                                 if (userRating != null)
                                   Text(
                                     '${userRating.toStringAsFixed(0)}/10',
-                                    style: AppStyles.bodyStyle,
+                                    style: AppStyles.bodyStyle(context),
                                   ),
                               ],
                             );
@@ -256,13 +257,13 @@ class GameDetailScreen extends StatelessWidget {
           const SizedBox(width: AppStyles.paddingMedium),
           Text(
             '$label: ',
-            style: AppStyles.bodyStyle.copyWith(
+            style: AppStyles.bodyStyle(context).copyWith(
               color: AppStyles.textLightColor,
             ),
           ),
           Text(
             value,
-            style: AppStyles.bodyStyle.copyWith(
+            style: AppStyles.bodyStyle(context).copyWith(
               fontWeight: FontWeight.w600,
               color: valueColor,
             ),

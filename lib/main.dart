@@ -5,6 +5,8 @@ import 'styles/app_styles.dart';
 import 'providers/auth_provider.dart';
 import 'providers/games_provider.dart';
 import 'providers/notifications_provider.dart';
+import 'providers/theme_provider.dart';
+import 'providers/orders_provider.dart';
 import 'screens/splash_screen_new.dart';
 
 void main() async {
@@ -23,6 +25,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => GamesProvider()),
         ChangeNotifierProvider(create: (_) => NotificationsProvider()),
+        ChangeNotifierProvider(create: (_) => OrdersProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
       child: Consumer<AuthProvider>(
         builder: (context, auth, child) {
@@ -30,6 +34,8 @@ class MyApp extends StatelessWidget {
             title: 'Game Studio Catalog',
             debugShowCheckedModeBanner: false,
             theme: AppStyles.themeData,
+            darkTheme: AppStyles.darkThemeData,
+            themeMode: context.watch<ThemeProvider>().themeMode,
             home: SplashScreenNew(
               isLoggedIn: auth.isLoggedIn,
               isAdmin: auth.isAdmin,

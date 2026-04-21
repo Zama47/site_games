@@ -219,7 +219,7 @@ class _GameFormScreenState extends State<GameFormScreen> {
               const SizedBox(height: AppStyles.paddingMedium),
               Text(
                 'Рейтинг: ${_rating.toStringAsFixed(1)}',
-                style: AppStyles.bodyStyle,
+                style: AppStyles.bodyStyle(context),
               ),
               Slider(
                 value: _rating,
@@ -236,7 +236,7 @@ class _GameFormScreenState extends State<GameFormScreen> {
               const SizedBox(height: AppStyles.paddingMedium),
               Text(
                 'Статус разработки (радио-кнопки)',
-                style: AppStyles.subtitleStyle,
+                style: AppStyles.subtitleStyle(context),
               ),
               const SizedBox(height: AppStyles.paddingSmall),
               ...Game.availableStatuses.map((status) {
@@ -266,7 +266,7 @@ class _GameFormScreenState extends State<GameFormScreen> {
               const SizedBox(height: AppStyles.paddingMedium),
               Text(
                 'Платформы (чекбоксы)',
-                style: AppStyles.subtitleStyle,
+                style: AppStyles.subtitleStyle(context),
               ),
               const SizedBox(height: AppStyles.paddingSmall),
               Wrap(

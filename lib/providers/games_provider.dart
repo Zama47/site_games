@@ -55,6 +55,10 @@ class GamesProvider extends ChangeNotifier {
       } else {
         _games.addAll(newGames);
         _currentPage++;
+        // If we got less than page size, there's no more data
+        if (newGames.length < 5) {
+          _hasMoreData = false;
+        }
       }
 
       _applyFiltersAndSort();

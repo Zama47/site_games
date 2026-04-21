@@ -78,7 +78,7 @@ class GameCard extends StatelessWidget {
                       Expanded(
                         child: Text(
                           game.title,
-                          style: AppStyles.subtitleStyle,
+                          style: AppStyles.subtitleStyle(context),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -101,7 +101,7 @@ class GameCard extends StatelessWidget {
                   const SizedBox(height: AppStyles.paddingSmall),
                   Text(
                     game.genre,
-                    style: AppStyles.captionStyle.copyWith(
+                    style: AppStyles.captionStyle(context).copyWith(
                       color: AppStyles.primaryColor,
                       fontWeight: FontWeight.w500,
                     ),
@@ -117,14 +117,14 @@ class GameCard extends StatelessWidget {
                       const SizedBox(width: 4),
                       Text(
                         game.rating.toStringAsFixed(1),
-                        style: AppStyles.bodyStyle.copyWith(
+                        style: AppStyles.bodyStyle(context).copyWith(
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                       const Spacer(),
                       Text(
                         _formatDate(game.releaseDate),
-                        style: AppStyles.captionStyle,
+                        style: AppStyles.captionStyle(context),
                       ),
                     ],
                   ),

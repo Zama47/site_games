@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppStyles {
-  // Colors
+  // Colors - Light
   static const Color primaryColor = Color(0xFF6C63FF);
   static const Color secondaryColor = Color(0xFF00BFA6);
   static const Color accentColor = Color(0xFFFF6584);
@@ -12,6 +12,13 @@ class AppStyles {
   static const Color errorColor = Color(0xFFE74C3C);
   static const Color successColor = Color(0xFF27AE60);
 
+  // Colors - Dark
+  static const Color darkBackgroundColor = Color(0xFF1A1A2E);
+  static const Color darkCardColor = Color(0xFF16213E);
+  static const Color darkTextColor = Color(0xFFEAEAEA);
+  static const Color darkTextLightColor = Color(0xFFB0B0B0);
+  static const Color darkSurfaceColor = Color(0xFF0F3460);
+
   // Gradients
   static const LinearGradient primaryGradient = LinearGradient(
     colors: [primaryColor, Color(0xFF8B80FF)],
@@ -19,32 +26,59 @@ class AppStyles {
     end: Alignment.bottomRight,
   );
 
-  // Text Styles
-  static const TextStyle headlineStyle = TextStyle(
+  // Text Styles - Adaptive (use these for theme-aware text)
+  static TextStyle headlineStyle(BuildContext context) => TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: Theme.of(context).colorScheme.onSurface,
+  );
+
+  static TextStyle titleStyle(BuildContext context) => TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    color: Theme.of(context).colorScheme.onSurface,
+  );
+
+  static TextStyle subtitleStyle(BuildContext context) => TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    color: Theme.of(context).colorScheme.onSurface,
+  );
+
+  static TextStyle bodyStyle(BuildContext context) => TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.normal,
+    color: Theme.of(context).colorScheme.onSurface,
+  );
+
+  static TextStyle captionStyle(BuildContext context) => TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
+    color: Theme.of(context).colorScheme.onSurfaceVariant,
+  );
+
+  // Legacy const styles (deprecated, use context-aware versions above)
+  static const TextStyle headlineStyleConst = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
     color: textColor,
   );
-
-  static const TextStyle titleStyle = TextStyle(
+  static const TextStyle titleStyleConst = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w600,
     color: textColor,
   );
-
-  static const TextStyle subtitleStyle = TextStyle(
+  static const TextStyle subtitleStyleConst = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w500,
     color: textColor,
   );
-
-  static const TextStyle bodyStyle = TextStyle(
+  static const TextStyle bodyStyleConst = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.normal,
     color: textColor,
   );
-
-  static const TextStyle captionStyle = TextStyle(
+  static const TextStyle captionStyleConst = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.normal,
     color: textLightColor,
@@ -90,14 +124,18 @@ class AppStyles {
   // Theme Data
   static ThemeData get themeData {
     return ThemeData(
+      useMaterial3: true,
       primaryColor: primaryColor,
       scaffoldBackgroundColor: backgroundColor,
       colorScheme: const ColorScheme.light(
         primary: primaryColor,
         secondary: secondaryColor,
         surface: cardColor,
+        surfaceContainerHighest: Color(0xFFE0E0E0),
         background: backgroundColor,
         error: errorColor,
+        onSurface: textColor,
+        onSurfaceVariant: textLightColor,
       ),
       appBarTheme: const AppBarTheme(
         backgroundColor: primaryColor,
@@ -127,7 +165,71 @@ class AppStyles {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: Colors.white,
+        fillColor: cardColor,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(radiusMedium),
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(radiusMedium),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(radiusMedium),
+          borderSide: const BorderSide(color: primaryColor, width: 2),
+        ),
+        contentPadding: const EdgeInsets.all(paddingMedium),
+      ),
+    );
+  }
+
+  static ThemeData get darkThemeData {
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.dark,
+      primaryColor: primaryColor,
+      scaffoldBackgroundColor: darkBackgroundColor,
+      colorScheme: ColorScheme.dark(
+        primary: primaryColor,
+        secondary: secondaryColor,
+        surface: darkCardColor,
+        surfaceContainerHighest: const Color(0xFF0F3460),
+        surfaceContainerHigh: const Color(0xFF16213E),
+        background: darkBackgroundColor,
+        error: errorColor,
+        onSurface: darkTextColor,
+        onSurfaceVariant: const Color(0xFFB0B0B0),
+        onBackground: darkTextColor,
+      ),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: darkSurfaceColor,
+        foregroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+      ),
+      cardTheme: CardThemeData(
+        color: darkCardColor,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radiusMedium),
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: primaryColor,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(
+            horizontal: paddingLarge,
+            vertical: paddingMedium,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(radiusMedium),
+          ),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: darkSurfaceColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radiusMedium),
           borderSide: BorderSide.none,

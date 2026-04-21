@@ -60,14 +60,14 @@ class _TrashScreenState extends State<TrashScreen> {
                   const SizedBox(height: AppStyles.paddingLarge),
                   Text(
                     'Корзина пуста',
-                    style: AppStyles.subtitleStyle.copyWith(
+                    style: AppStyles.subtitleStyle(context).copyWith(
                       color: AppStyles.textLightColor,
                     ),
                   ),
                   const SizedBox(height: AppStyles.paddingSmall),
                   Text(
                     'Удалённые игры появятся здесь',
-                    style: AppStyles.captionStyle,
+                    style: AppStyles.captionStyle(context),
                   ),
                 ],
               ),
@@ -98,22 +98,22 @@ class _TrashScreenState extends State<TrashScreen> {
                           Container(
                         width: 60,
                         height: 60,
-                        color: Colors.grey.shade300,
-                        child: const Icon(Icons.image_not_supported),
+                        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                        child: Icon(Icons.image_not_supported, color: Theme.of(context).colorScheme.onSurfaceVariant),
                       ),
                     ),
                   ),
                   title: Text(
                     game.title,
-                    style: AppStyles.subtitleStyle,
+                    style: AppStyles.subtitleStyle(context),
                   ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(game.genre, style: AppStyles.captionStyle),
+                      Text(game.genre, style: AppStyles.captionStyle(context)),
                       Text(
                         'Удалена: ${_formatDate(deletedAt)}',
-                        style: AppStyles.captionStyle.copyWith(
+                        style: AppStyles.captionStyle(context).copyWith(
                           color: AppStyles.errorColor,
                         ),
                       ),

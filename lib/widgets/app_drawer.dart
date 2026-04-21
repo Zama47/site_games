@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../providers/notifications_provider.dart';
+import '../providers/theme_provider.dart';
 import '../styles/app_styles.dart';
 import '../screens/games_list_screen.dart';
 import '../screens/favorites_screen.dart';
@@ -93,6 +94,23 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           const Divider(),
+          Consumer<ThemeProvider>(
+            builder: (context, themeProvider, child) {
+              return ListTile(
+                leading: Icon(
+                  themeProvider.isDarkMode ? Icons.light_mode : Icons.dark_mode,
+                  color: AppStyles.primaryColor,
+                ),
+                title: Text(themeProvider.isDarkMode ? 'Светлая тема' : 'Темная тема'),
+                trailing: Switch(
+                  value: themeProvider.isDarkMode,
+                  onChanged: (value) => themeProvider.toggleTheme(),
+                  activeColor: AppStyles.primaryColor,
+                ),
+                onTap: () => themeProvider.toggleTheme(),
+              );
+            },
+          ),
           ListTile(
             leading: const Icon(Icons.exit_to_app, color: AppStyles.errorColor),
             title: const Text(
