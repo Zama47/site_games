@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import '../models/user.dart';
 import '../services/auth_service.dart';
+import '../services/storage_service.dart';
 
 class AuthProvider extends ChangeNotifier {
   final AuthService _authService = AuthService();
@@ -40,18 +41,35 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      _user = await _authService.login(username, password);
-      if (_user == null) {
+      // Check if user exists with these credentials
+      final existingUser = User.defaultUsers.firstWhere(
+        (u) => u.username == username && u.password == password,
+        orElse: () => User(id: '', username: '', password: '', role: UserRole.gamer, displayName: ''),
+      );
+      
+      // If user not found
+      if (existingUser.id.isEmpty) {
         _error = 'Неверный логин или пароль';
         _isLoading = false;
         notifyListeners();
         return false;
       }
+      
+      // Check if user is blocked
+      final isBlocked = await StorageService().isUserBlocked(existingUser.id);
+      if (isBlocked) {
+        _error = 'Пользователь заблокирован. Обратитесь к администратору.';
+        _isLoading = false;
+        notifyListeners();
+        return false;
+      }
+      
+      _user = await _authService.login(username, password);
       _isLoading = false;
       notifyListeners();
-      return true;
+      return _user != null;
     } catch (e) {
-      _error = e.toString();
+      _error = 'Неверный логин или пароль';
       _isLoading = false;
       notifyListeners();
       return false;

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/games_provider.dart';
 import '../providers/auth_provider.dart';
 import '../providers/notifications_provider.dart';
+import '../providers/orders_provider.dart';
 import '../styles/app_styles.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/game_card_new.dart';
@@ -29,6 +30,10 @@ class _GamesListScreenState extends State<GamesListScreen> {
       // Force refresh to load updated game data with screenshots
       context.read<GamesProvider>().loadGames(refresh: true);
       context.read<NotificationsProvider>().loadNotifications();
+      // Load pending orders count for admin badge
+      if (context.read<AuthProvider>().isAdmin) {
+        context.read<OrdersProvider>().refreshPendingCount();
+      }
     });
   }
 

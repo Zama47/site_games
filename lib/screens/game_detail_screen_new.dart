@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../models/game.dart';
 import '../providers/games_provider.dart';
 import '../providers/auth_provider.dart';
+import '../providers/orders_provider.dart';
 import '../styles/app_styles.dart';
 import 'game_form_screen.dart';
 
@@ -616,48 +617,59 @@ class _GameDetailScreenNewState extends State<GameDetailScreenNew>
         ],
       ),
       floatingActionButton: !isAdmin
-          ? Consumer<GamesProvider>(
-              builder: (context, gamesProvider, child) {
-                return FutureBuilder<bool>(
-                  future: gamesProvider.isFavorite(widget.game.id),
-                  builder: (context, snapshot) {
-                    final isFavorite = snapshot.data ?? false;
-                    return FloatingActionButton.extended(
-                      onPressed: () {
-                        gamesProvider.toggleFavorite(widget.game.id);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              isFavorite
-                                  ? 'Удалено из избранного'
-                                  : 'Добавлено в избранное',
-                            ),
-                            action: SnackBarAction(
-                              label: 'Отмена',
-                              onPressed: () {
-                                gamesProvider.toggleFavorite(widget.game.id);
-                              },
-                            ),
+          ? Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                // Favorite button
+                Consumer<GamesProvider>(
+                  builder: (context, gamesProvider, child) {
+                    return FutureBuilder<bool>(
+                      future: gamesProvider.isFavorite(widget.game.id),
+                      builder: (context, snapshot) {
+                        final isFavorite = snapshot.data ?? false;
+                        return FloatingActionButton.small(
+                          onPressed: () {
+                            gamesProvider.toggleFavorite(widget.game.id);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  isFavorite
+                                      ? 'Удалено из избранного'
+                                      : 'Добавлено в избранное',
+                                ),
+                                action: SnackBarAction(
+                                  label: 'Отмена',
+                                  onPressed: () {
+                                    gamesProvider.toggleFavorite(widget.game.id);
+                                  },
+                                ),
+                              ),
+                            );
+                          },
+                          backgroundColor:
+                              isFavorite ? AppStyles.accentColor : Theme.of(context).colorScheme.surface,
+                          child: Icon(
+                            isFavorite ? Icons.favorite : Icons.favorite_border,
+                            color: isFavorite ? Colors.white : AppStyles.accentColor,
                           ),
                         );
                       },
-                      backgroundColor:
-                          isFavorite ? AppStyles.accentColor : Theme.of(context).colorScheme.surface,
-                      icon: Icon(
-                        isFavorite ? Icons.favorite : Icons.favorite_border,
-                        color: isFavorite ? Colors.white : AppStyles.accentColor,
-                      ),
-                      label: Text(
-                        isFavorite ? 'В избранном' : 'В избранное',
-                        style: TextStyle(
-                          color:
-                              isFavorite ? Colors.white : AppStyles.accentColor,
-                        ),
-                      ),
                     );
                   },
-                );
-              },
+                ),
+                const SizedBox(height: 8),
+                // Order button
+                FloatingActionButton.extended(
+                  onPressed: () => _showOrderDialog(context),
+                  backgroundColor: AppStyles.primaryColor,
+                  icon: const Icon(Icons.shopping_basket, color: Colors.white),
+                  label: const Text(
+                    'Заказать',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
             )
           : null,
     );
@@ -804,6 +816,70 @@ class _GameDetailScreenNewState extends State<GameDetailScreenNew>
               backgroundColor: AppStyles.errorColor,
             ),
             child: const Text('Удалить'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showOrderDialog(BuildContext context) {
+    final commentController = TextEditingController();
+    final authProvider = context.read<AuthProvider>();
+    final ordersProvider = context.read<OrdersProvider>();
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Заказать игру'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '"${widget.game.title}"',
+              style: AppStyles.subtitleStyle(context).copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: AppStyles.paddingMedium),
+            TextField(
+              controller: commentController,
+              decoration: const InputDecoration(
+                labelText: 'Комментарий (необязательно)',
+                hintText: 'Например: Хочу получить доступ к бета-тесту',
+              ),
+              maxLines: 3,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Отмена'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              final user = authProvider.user;
+              if (user != null) {
+                ordersProvider.createOrder(
+                  gameId: widget.game.id,
+                  userId: user.id,
+                  userName: user.displayName,
+                  gameTitle: widget.game.title,
+                  comment: commentController.text.isNotEmpty
+                      ? commentController.text
+                      : null,
+                );
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Заказ создан и отправлен на рассмотрение'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              }
+            },
+            child: const Text('Отправить заказ'),
           ),
         ],
       ),

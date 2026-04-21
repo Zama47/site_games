@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../styles/app_styles.dart';
+import '../widgets/animated_app_logo.dart';
 import 'login_screen.dart';
 import 'games_list_screen.dart';
 
@@ -20,11 +21,7 @@ class SplashScreenNew extends StatefulWidget {
 class _SplashScreenNewState extends State<SplashScreenNew>
     with TickerProviderStateMixin {
   late AnimationController _controller;
-  late AnimationController _pulseController;
-  late Animation<double> _scaleAnimation;
   late Animation<double> _fadeAnimation;
-  late Animation<double> _rotateAnimation;
-  late Animation<double> _pulseAnimation;
 
   @override
   void initState() {
@@ -35,24 +32,6 @@ class _SplashScreenNewState extends State<SplashScreenNew>
       duration: const Duration(milliseconds: 2000),
     );
 
-    _pulseController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1500),
-    );
-
-    _scaleAnimation = TweenSequence<double>([
-      TweenSequenceItem(
-        tween: Tween<double>(begin: 0.0, end: 1.2)
-            .chain(CurveTween(curve: Curves.easeOutCubic)),
-        weight: 50,
-      ),
-      TweenSequenceItem(
-        tween: Tween<double>(begin: 1.2, end: 1.0)
-            .chain(CurveTween(curve: Curves.easeInOut)),
-        weight: 50,
-      ),
-    ]).animate(_controller);
-
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
@@ -60,23 +39,7 @@ class _SplashScreenNewState extends State<SplashScreenNew>
       ),
     );
 
-    _rotateAnimation = Tween<double>(begin: -0.5, end: 0.0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeOutBack,
-      ),
-    );
-
-    _pulseAnimation = Tween<double>(begin: 1.0, end: 1.1).animate(
-      CurvedAnimation(
-        parent: _pulseController,
-        curve: Curves.easeInOut,
-      ),
-    );
-
-    _controller.forward().then((_) {
-      _pulseController.repeat(reverse: true);
-    });
+    _controller.forward();
 
     Future.delayed(const Duration(seconds: 3), () {
       if (mounted) {
@@ -108,7 +71,6 @@ class _SplashScreenNewState extends State<SplashScreenNew>
   @override
   void dispose() {
     _controller.dispose();
-    _pulseController.dispose();
     super.dispose();
   }
 
@@ -159,42 +121,12 @@ class _SplashScreenNewState extends State<SplashScreenNew>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  AnimatedBuilder(
-                    animation: Listenable.merge([
-                      _controller,
-                      _pulseController,
-                    ]),
-                    builder: (context, child) {
-                      return Transform.rotate(
-                        angle: _rotateAnimation.value,
-                        child: Transform.scale(
-                          scale: _scaleAnimation.value * _pulseAnimation.value,
-                          child: FadeTransition(
-                            opacity: _fadeAnimation,
-                            child: Container(
-                              width: 140,
-                              height: 140,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(35),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.3),
-                                    blurRadius: 30,
-                                    offset: const Offset(0, 15),
-                                  ),
-                                ],
-                              ),
-                              child: const Icon(
-                                Icons.games,
-                                size: 70,
-                                color: Color(0xFF667eea),
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
+                  // Animated spinning logo
+                  const AnimatedAppLogo(
+                    size: 140,
+                    animate: true,
+                    spin: true,
+                    spinDuration: Duration(seconds: 3),
                   ),
                   const SizedBox(height: 40),
                   FadeTransition(

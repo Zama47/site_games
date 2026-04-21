@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../providers/notifications_provider.dart';
+import '../providers/orders_provider.dart';
 import '../providers/theme_provider.dart';
 import '../styles/app_styles.dart';
 import '../screens/games_list_screen.dart';
@@ -9,6 +10,10 @@ import '../screens/favorites_screen.dart';
 import '../screens/trash_screen.dart';
 import '../screens/notifications_screen.dart';
 import '../screens/game_form_screen.dart';
+import '../screens/login_screen.dart';
+import '../screens/orders_screen.dart';
+import '../screens/admin_orders_screen.dart';
+import '../screens/admin_users_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -57,13 +62,20 @@ class AppDrawer extends StatelessWidget {
                   title: 'Главная',
                   onTap: () => _navigateTo(context, const GamesListScreen()),
                 ),
-                if (!isAdmin)
+                if (!isAdmin) ...[
                   _buildMenuItem(
                     context,
                     icon: Icons.favorite,
                     title: 'Избранное',
                     onTap: () => _navigateTo(context, const FavoritesScreen()),
                   ),
+                  _buildMenuItem(
+                    context,
+                    icon: Icons.shopping_basket,
+                    title: 'Мои заказы',
+                    onTap: () => _navigateTo(context, const OrdersScreen()),
+                  ),
+                ],
                 if (isAdmin) ...[
                   _buildMenuItem(
                     context,
@@ -87,6 +99,24 @@ class AppDrawer extends StatelessWidget {
                     onTap: () => _navigateTo(
                       context,
                       const NotificationsScreen(),
+                    ),
+                  ),
+                  _buildMenuItemWithOrdersBadge(
+                    context,
+                    icon: Icons.assignment_turned_in,
+                    title: 'Модерация заказов',
+                    onTap: () => _navigateTo(
+                      context,
+                      const AdminOrdersScreen(),
+                    ),
+                  ),
+                  _buildMenuItem(
+                    context,
+                    icon: Icons.people,
+                    title: 'Управление пользователями',
+                    onTap: () => _navigateTo(
+                      context,
+                      const AdminUsersScreen(),
                     ),
                   ),
                 ],
@@ -121,7 +151,7 @@ class AppDrawer extends StatelessWidget {
               await authProvider.logout();
               if (context.mounted) {
                 Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => const GamesListScreen()),
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
                   (route) => false,
                 );
               }
@@ -170,6 +200,44 @@ class AppDrawer extends StatelessWidget {
                   ),
                   child: Text(
                     unreadCount.toString(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
+              : null,
+          onTap: () {
+            Navigator.of(context).pop();
+            onTap();
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildMenuItemWithOrdersBadge(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return Consumer<OrdersProvider>(
+      builder: (context, ordersProvider, child) {
+        final pendingCount = ordersProvider.pendingCount;
+        return ListTile(
+          leading: Icon(icon, color: AppStyles.primaryColor),
+          title: Text(title),
+          trailing: pendingCount > 0
+              ? Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.orange,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    pendingCount.toString(),
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 12,

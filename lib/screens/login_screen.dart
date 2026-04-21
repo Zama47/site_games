@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../styles/app_styles.dart';
+import '../widgets/animated_app_logo.dart';
 import 'games_list_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -82,10 +83,11 @@ class _LoginScreenState extends State<LoginScreen>
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(
-                            Icons.games,
-                            size: 80,
-                            color: AppStyles.primaryColor,
+                          // Custom app icon
+                          const AnimatedAppLogo(
+                            size: 100,
+                            animate: true,
+                            spin: false,
                           ),
                           const SizedBox(height: AppStyles.paddingMedium),
                           Text(
