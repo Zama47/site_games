@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../providers/notifications_provider.dart';
+import '../providers/games_provider.dart';
 import '../styles/app_styles.dart';
 import '../widgets/app_drawer.dart';
+import 'orders_screen.dart';
+import 'game_detail_screen_new.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
@@ -149,9 +152,29 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                             shape: BoxShape.circle,
                           ),
                         ),
-                  onTap: () {
+                  onTap: () async {
                     if (!isRead) {
-                      notifications.markAsRead(notification['id'] as int);
+                      await notifications.markAsRead(notification['id'] as int);
+                    }
+                    final targetId = notification['targetId'] as int?;
+                    if (targetId != null) {
+                      final type = notification['type'] as String? ?? '';
+                      if (type.startsWith('order')) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const OrdersScreen(),
+                          ),
+                        );
+                      } else if (type == 'favorite' || type == 'rating') {
+                        final game = await context.read<GamesProvider>().getGameById(targetId);
+                        if (game != null && mounted) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => GameDetailScreenNew(game: game),
+                            ),
+                          );
+                        }
+                      }
                     }
                   },
                   tileColor: isRead ? null : AppStyles.primaryColor.withOpacity(0.05),

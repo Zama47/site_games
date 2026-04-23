@@ -27,8 +27,8 @@ class NotificationsProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> addNotification(String message, String type) async {
-    await _storageService.addNotification(message, type);
+  Future<void> addNotification(String message, String type, {int? targetId}) async {
+    await _storageService.addNotification(message, type, targetId: targetId);
     await loadNotifications();
   }
 

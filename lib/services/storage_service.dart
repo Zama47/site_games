@@ -152,13 +152,14 @@ class StorageService {
     return [];
   }
 
-  Future<void> addNotification(String message, String type) async {
+  Future<void> addNotification(String message, String type, {int? targetId}) async {
     final prefs = await _prefs;
     final notifications = await getNotifications();
     notifications.insert(0, {
       'id': DateTime.now().millisecondsSinceEpoch,
       'message': message,
       'type': type,
+      'targetId': targetId,
       'timestamp': DateTime.now().toIso8601String(),
       'read': false,
     });

@@ -112,8 +112,8 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
       drawer: const AppDrawer(),
       body: Consumer<OrdersProvider>(
         builder: (context, ordersProvider, child) {
-          final orders = _filterStatus == 'all'
-              ? ordersProvider.orders
+          final orders = _filterStatus == 'pending'
+              ? ordersProvider.pendingOrders
               : ordersProvider.orders;
 
           if (ordersProvider.isLoading) {

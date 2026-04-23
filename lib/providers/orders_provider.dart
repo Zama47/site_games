@@ -67,6 +67,7 @@ class OrdersProvider extends ChangeNotifier {
     await _storageService.addNotification(
       'Новый заказ на игру "$gameTitle" от $userName',
       'order',
+      targetId: order.id,
     );
     
     await loadOrders(userId: userId);
@@ -83,6 +84,7 @@ class OrdersProvider extends ChangeNotifier {
     await _storageService.addNotification(
       'Ваш заказ на "${order.gameTitle}" одобрен!',
       'order_approved',
+      targetId: orderId,
     );
     
     await loadPendingOrders();
@@ -99,6 +101,7 @@ class OrdersProvider extends ChangeNotifier {
     await _storageService.addNotification(
       'Ваш заказ на "${order.gameTitle}" отклонен',
       'order_rejected',
+      targetId: orderId,
     );
     
     await loadPendingOrders();

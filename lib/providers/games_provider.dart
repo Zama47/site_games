@@ -37,6 +37,7 @@ class GamesProvider extends ChangeNotifier {
     if (refresh) {
       _currentPage = 0;
       _games = [];
+      _filteredGames = [];
       _hasMoreData = true;
     }
 
@@ -56,12 +57,16 @@ class GamesProvider extends ChangeNotifier {
         _games.addAll(newGames);
         _currentPage++;
         // If we got less than page size, there's no more data
-        if (newGames.length < 5) {
+        if (newGames.length < ApiService.pageSize) {
           _hasMoreData = false;
         }
       }
 
-      _applyFiltersAndSort();
+      if (refresh) {
+        _applyFiltersAndSort();
+      } else {
+        _appendFilteredGames(newGames);
+      }
       _isLoading = false;
       _isLoadingMore = false;
       notifyListeners();
@@ -107,6 +112,7 @@ class GamesProvider extends ChangeNotifier {
       await _storageService.addNotification(
         'Игра добавлена в избранное пользователем',
         'favorite',
+        targetId: gameId,
       );
     }
     await loadFavorites();
@@ -133,6 +139,29 @@ class GamesProvider extends ChangeNotifier {
     _searchQuery = query;
     _applyFiltersAndSort();
     notifyListeners();
+  }
+
+  void _appendFilteredGames(List<Game> newGames) {
+    var filtered = List<Game>.from(newGames);
+
+    // Apply genre filter
+    if (_selectedGenres.isNotEmpty) {
+      filtered = filtered
+          .where((game) => _selectedGenres.contains(game.genre))
+          .toList();
+    }
+
+    // Apply search
+    if (_searchQuery.isNotEmpty) {
+      final query = _searchQuery.toLowerCase();
+      filtered = filtered
+          .where((game) =>
+              game.title.toLowerCase().contains(query) ||
+              game.genre.toLowerCase().contains(query))
+          .toList();
+    }
+
+    _filteredGames.addAll(filtered);
   }
 
   void _applyFiltersAndSort() {
@@ -219,11 +248,25 @@ class GamesProvider extends ChangeNotifier {
     await _storageService.addNotification(
       'Игра получила оценку $rating',
       'rating',
+      targetId: gameId,
     );
     notifyListeners();
   }
 
   Future<double?> getGameRating(int gameId) async {
     return await _storageService.getRating(gameId);
+  }
+
+  Future<Game?> getGameById(int gameId) async {
+    try {
+      return _games.firstWhere((g) => g.id == gameId);
+    } catch (_) {
+      try {
+        final allGames = await _apiService.fetchAllGames();
+        return allGames.firstWhere((g) => g.id == gameId);
+      } catch (_) {
+        return null;
+      }
+    }
   }
 }
