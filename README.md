@@ -1,17 +1,31 @@
-# game_studio_catalog
+# GameStore – Mobile Shop for PC Games
 
-A new Flutter project.
+🛠 Стек технологий
+- **Flutter** (Dart) – фронтенд
+- **BLoC / Cubit** (или то, что вы используете – укажите реальное состояние)
+- **REST API** – (напишите, какой бэк: Firebase / Node.js / имитация локально)
+- **SQLite / Hive** – локальное кэширование (если есть)
+- **Git** – контроль версий
 
-## Getting Started
+Для пользователя
+- Регистрация / авторизация
+- Просмотр каталога игр с фильтрацией по жанру / цене
+- Добавление игр в корзину
+- Оформление заказа
+- Просмотр истории заказов
 
-This project is a starting point for a Flutter application.
+Для администратора
+- Вход по отдельным учётным данным (если есть тестовый аккаунт – укажите)
+- Добавление новых игр
+- Редактирование / удаление существующих игр
+- Просмотр всех заказов от пользователей
 
-A few resources to get you started if this is your first Flutter project:
+🚀 Как запустить проект (для рекрутера)
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. **Установите Flutter** – [инструкция](https://docs.flutter.dev/get-started/install)
+2. **Клонируйте репозиторий**  
+   ```bash
+   git clone https://github.com/Zama47/site_games.git
+   cd site_games
+   flutter pub get
+   flutter run
