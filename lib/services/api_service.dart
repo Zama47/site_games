@@ -32,42 +32,42 @@ class ApiService {
         }
       }
       
+      // Filter deleted games before pagination
+      final allGames = jsonData
+          .map((json) => Game.fromJson(json))
+          .where((game) => !game.isDeleted)
+          .toList();
+      
       // Pagination: return 5 items per page
       final startIndex = page * pageSize;
       final endIndex = startIndex + pageSize;
       
-      if (startIndex >= jsonData.length) {
+      if (startIndex >= allGames.length) {
         return []; // No more data
       }
       
-      final paginatedData = jsonData.sublist(
+      return allGames.sublist(
         startIndex,
-        endIndex > jsonData.length ? jsonData.length : endIndex,
+        endIndex > allGames.length ? allGames.length : endIndex,
       );
-      
-      return paginatedData
-          .map((json) => Game.fromJson(json))
-          .where((game) => !game.isDeleted)
-          .toList();
     } catch (e) {
       // Fallback to local data on error with pagination
       final jsonData = gamesSteamData;
-      final startIndex = page * pageSize;
-      final endIndex = startIndex + pageSize;
-      
-      if (startIndex >= jsonData.length) {
-        return [];
-      }
-      
-      final paginatedData = jsonData.sublist(
-        startIndex,
-        endIndex > jsonData.length ? jsonData.length : endIndex,
-      );
-      
-      return paginatedData
+      final allGames = jsonData
           .map((json) => Game.fromJson(json))
           .where((game) => !game.isDeleted)
           .toList();
+      final startIndex = page * pageSize;
+      final endIndex = startIndex + pageSize;
+      
+      if (startIndex >= allGames.length) {
+        return [];
+      }
+      
+      return allGames.sublist(
+        startIndex,
+        endIndex > allGames.length ? allGames.length : endIndex,
+      );
     }
   }
 
