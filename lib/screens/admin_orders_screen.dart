@@ -51,6 +51,8 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
   void _loadOrders() {
     if (_filterStatus == 'pending') {
       context.read<OrdersProvider>().loadPendingOrders();
+    } else if (_filterStatus == 'all') {
+      context.read<OrdersProvider>().loadOrders();
     } else {
       context.read<OrdersProvider>().loadOrders(status: _filterStatus);
     }
@@ -75,18 +77,12 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                 value: 'pending',
                 child: Text('На рассмотрении'),
               ),
-              const PopupMenuItem(
-                value: 'approved',
-                child: Text('Одобренные'),
-              ),
+              const PopupMenuItem(value: 'approved', child: Text('Одобренные')),
               const PopupMenuItem(
                 value: 'rejected',
                 child: Text('Отклоненные'),
               ),
-              const PopupMenuItem(
-                value: 'all',
-                child: Text('Все'),
-              ),
+              const PopupMenuItem(value: 'all', child: Text('Все')),
             ],
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -96,10 +92,10 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                     _filterStatus == 'pending'
                         ? 'На рассмотрении'
                         : _filterStatus == 'approved'
-                            ? 'Одобренные'
-                            : _filterStatus == 'rejected'
-                                ? 'Отклоненные'
-                                : 'Все',
+                        ? 'Одобренные'
+                        : _filterStatus == 'rejected'
+                        ? 'Отклоненные'
+                        : 'Все',
                     style: const TextStyle(color: Colors.white),
                   ),
                   const Icon(Icons.arrow_drop_down, color: Colors.white),
@@ -112,14 +108,12 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
       drawer: const AppDrawer(),
       body: Consumer<OrdersProvider>(
         builder: (context, ordersProvider, child) {
-          final orders = _filterStatus == 'all'
-              ? ordersProvider.orders
+          final orders = _filterStatus == 'pending'
+              ? ordersProvider.pendingOrders
               : ordersProvider.orders;
 
           if (ordersProvider.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (orders.isEmpty) {
@@ -135,9 +129,9 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                   const SizedBox(height: AppStyles.paddingLarge),
                   Text(
                     'Нет заказов',
-                    style: AppStyles.subtitleStyle(context).copyWith(
-                      color: AppStyles.textLightColor,
-                    ),
+                    style: AppStyles.subtitleStyle(
+                      context,
+                    ).copyWith(color: AppStyles.textLightColor),
                   ),
                   const SizedBox(height: AppStyles.paddingSmall),
                   Text(
@@ -160,13 +154,19 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
               itemBuilder: (context, index) {
                 final order = orders[index];
                 return Card(
-                  margin: const EdgeInsets.only(bottom: AppStyles.paddingMedium),
+                  margin: const EdgeInsets.only(
+                    bottom: AppStyles.paddingMedium,
+                  ),
                   child: Column(
                     children: [
                       ListTile(
-                        contentPadding: const EdgeInsets.all(AppStyles.paddingMedium),
+                        contentPadding: const EdgeInsets.all(
+                          AppStyles.paddingMedium,
+                        ),
                         leading: CircleAvatar(
-                          backgroundColor: _getStatusColor(order.status).withOpacity(0.1),
+                          backgroundColor: _getStatusColor(
+                            order.status,
+                          ).withOpacity(0.1),
                           child: Icon(
                             _getStatusIcon(order.status),
                             color: _getStatusColor(order.status),
@@ -182,35 +182,39 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                             const SizedBox(height: 4),
                             Text(
                               'От: ${order.userName}',
-                              style: AppStyles.bodyStyle(context).copyWith(
-                                fontWeight: FontWeight.w500,
-                              ),
+                              style: AppStyles.bodyStyle(
+                                context,
+                              ).copyWith(fontWeight: FontWeight.w500),
                             ),
                             const SizedBox(height: 4),
                             Text(
                               'Дата: ${_formatDate(order.createdAt)}',
                               style: AppStyles.captionStyle(context),
                             ),
-                            if (order.comment != null && order.comment!.isNotEmpty) ...[
+                            if (order.comment != null &&
+                                order.comment!.isNotEmpty) ...[
                               const SizedBox(height: 4),
                               Text(
                                 'Комментарий: ${order.comment}',
                                 style: AppStyles.captionStyle(context),
                               ),
                             ],
-                            if (order.adminComment != null && order.adminComment!.isNotEmpty) ...[
+                            if (order.adminComment != null &&
+                                order.adminComment!.isNotEmpty) ...[
                               const SizedBox(height: 4),
                               Container(
                                 padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
-                                  color: AppStyles.primaryColor.withOpacity(0.1),
+                                  color: AppStyles.primaryColor.withOpacity(
+                                    0.1,
+                                  ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
                                   'Ответ: ${order.adminComment}',
-                                  style: AppStyles.captionStyle(context).copyWith(
-                                    color: AppStyles.primaryColor,
-                                  ),
+                                  style: AppStyles.captionStyle(
+                                    context,
+                                  ).copyWith(color: AppStyles.primaryColor),
                                 ),
                               ),
                             ],
@@ -307,9 +311,9 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                     : null,
               );
               Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Заказ одобрен')),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(const SnackBar(content: Text('Заказ одобрен')));
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppStyles.successColor,
@@ -357,9 +361,9 @@ class _AdminOrdersScreenState extends State<AdminOrdersScreen> {
                     : null,
               );
               Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Заказ отклонен')),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(const SnackBar(content: Text('Заказ отклонен')));
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppStyles.errorColor,

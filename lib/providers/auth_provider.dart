@@ -41,35 +41,51 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      // Check if user exists with these credentials
-      final existingUser = User.defaultUsers.firstWhere(
-        (u) => u.username == username && u.password == password,
-        orElse: () => User(id: '', username: '', password: '', role: UserRole.gamer, displayName: ''),
-      );
-      
-      // If user not found
-      if (existingUser.id.isEmpty) {
+      // Attempt login via AuthService (which checks built-in and custom users)
+      final logged = await _authService.login(username, password);
+      if (logged == null) {
         _error = 'Неверный логин или пароль';
         _isLoading = false;
         notifyListeners();
         return false;
       }
-      
+
       // Check if user is blocked
-      final isBlocked = await StorageService().isUserBlocked(existingUser.id);
+      final isBlocked = await StorageService().isUserBlocked(logged.id);
       if (isBlocked) {
         _error = 'Пользователь заблокирован. Обратитесь к администратору.';
         _isLoading = false;
         notifyListeners();
         return false;
       }
-      
-      _user = await _authService.login(username, password);
+
+      _user = logged;
       _isLoading = false;
       notifyListeners();
       return _user != null;
     } catch (e) {
       _error = 'Неверный логин или пароль';
+      _isLoading = false;
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> register(String username, String password, String displayName) async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+
+    try {
+      final success = await _authService.register(username, password, displayName);
+      if (!success) {
+        _error = 'Пользователь с таким логином уже существует';
+      }
+      _isLoading = false;
+      notifyListeners();
+      return success;
+    } catch (e) {
+      _error = 'Ошибка регистрации';
       _isLoading = false;
       notifyListeners();
       return false;

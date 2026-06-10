@@ -34,7 +34,11 @@ class GameDetailScreen extends StatelessWidget {
                 ),
                 errorWidget: (context, url, error) => Container(
                   color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                  child: Icon(Icons.image_not_supported, size: 50, color: Theme.of(context).colorScheme.onSurfaceVariant),
+                  child: Icon(
+                    Icons.image_not_supported,
+                    size: 50,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
                 ),
               ),
             ),
@@ -68,7 +72,7 @@ class GameDetailScreen extends StatelessWidget {
                       Expanded(
                         child: Text(
                           game.title,
-                          style: AppStyles.headlineStyle,
+                          style: AppStyles.headlineStyle(context),
                         ),
                       ),
                       if (!isAdmin)
@@ -108,8 +112,9 @@ class GameDetailScreen extends StatelessWidget {
                         ),
                         decoration: BoxDecoration(
                           color: AppStyles.primaryColor.withOpacity(0.1),
-                          borderRadius:
-                              BorderRadius.circular(AppStyles.radiusSmall),
+                          borderRadius: BorderRadius.circular(
+                            AppStyles.radiusSmall,
+                          ),
                         ),
                         child: Text(
                           game.genre,
@@ -128,8 +133,9 @@ class GameDetailScreen extends StatelessWidget {
                           ),
                           decoration: BoxDecoration(
                             color: AppStyles.successColor.withOpacity(0.1),
-                            borderRadius:
-                                BorderRadius.circular(AppStyles.radiusSmall),
+                            borderRadius: BorderRadius.circular(
+                              AppStyles.radiusSmall,
+                            ),
                           ),
                           child: const Text(
                             'Бесплатно',
@@ -143,43 +149,42 @@ class GameDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: AppStyles.paddingLarge),
                   _buildInfoRow(
+                    context: context,
                     icon: Icons.star,
                     label: 'Рейтинг',
                     value: '${game.rating.toStringAsFixed(1)} / 10',
                     valueColor: Colors.amber,
                   ),
                   _buildInfoRow(
+                    context: context,
                     icon: Icons.business,
                     label: 'Разработчик',
                     value: game.developer,
                   ),
                   _buildInfoRow(
+                    context: context,
                     icon: Icons.calendar_today,
                     label: 'Дата выхода',
-                    value: DateFormat('dd MMMM yyyy', 'ru').format(game.releaseDate),
+                    value: DateFormat(
+                      'dd MMMM yyyy',
+                      'ru',
+                    ).format(game.releaseDate),
                   ),
                   _buildInfoRow(
+                    context: context,
                     icon: Icons.info,
                     label: 'Статус',
                     value: game.status,
                   ),
                   const SizedBox(height: AppStyles.paddingLarge),
-                  Text(
-                    'Описание',
-                    style: AppStyles.subtitleStyle(context),
-                  ),
+                  Text('Описание', style: AppStyles.subtitleStyle(context)),
                   const SizedBox(height: AppStyles.paddingSmall),
                   Text(
                     game.description,
-                    style: AppStyles.bodyStyle(context).copyWith(
-                      height: 1.5,
-                    ),
+                    style: AppStyles.bodyStyle(context).copyWith(height: 1.5),
                   ),
                   const SizedBox(height: AppStyles.paddingLarge),
-                  Text(
-                    'Платформы',
-                    style: AppStyles.subtitleStyle(context),
-                  ),
+                  Text('Платформы', style: AppStyles.subtitleStyle(context)),
                   const SizedBox(height: AppStyles.paddingSmall),
                   Wrap(
                     spacing: AppStyles.paddingSmall,
@@ -187,7 +192,9 @@ class GameDetailScreen extends StatelessWidget {
                     children: game.platforms.map((platform) {
                       return Chip(
                         label: Text(platform),
-                        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+                        backgroundColor: Theme.of(
+                          context,
+                        ).colorScheme.surfaceContainerHighest,
                       );
                     }).toList(),
                   ),
@@ -244,6 +251,7 @@ class GameDetailScreen extends StatelessWidget {
   }
 
   Widget _buildInfoRow({
+    required BuildContext context,
     required IconData icon,
     required String label,
     required String value,
@@ -257,16 +265,15 @@ class GameDetailScreen extends StatelessWidget {
           const SizedBox(width: AppStyles.paddingMedium),
           Text(
             '$label: ',
-            style: AppStyles.bodyStyle(context).copyWith(
-              color: AppStyles.textLightColor,
-            ),
+            style: AppStyles.bodyStyle(
+              context,
+            ).copyWith(color: AppStyles.textLightColor),
           ),
           Text(
             value,
-            style: AppStyles.bodyStyle(context).copyWith(
-              fontWeight: FontWeight.w600,
-              color: valueColor,
-            ),
+            style: AppStyles.bodyStyle(
+              context,
+            ).copyWith(fontWeight: FontWeight.w600, color: valueColor),
           ),
         ],
       ),

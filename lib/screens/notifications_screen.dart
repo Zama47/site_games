@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../providers/notifications_provider.dart';
+import '../screens/admin_orders_screen.dart';
+import '../screens/orders_screen.dart';
 import '../styles/app_styles.dart';
 import '../widgets/app_drawer.dart';
 
@@ -55,9 +57,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       body: Consumer<NotificationsProvider>(
         builder: (context, notifications, child) {
           if (notifications.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (notifications.notifications.isEmpty) {
@@ -73,9 +73,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   const SizedBox(height: AppStyles.paddingLarge),
                   Text(
                     'Нет уведомлений',
-                    style: AppStyles.subtitleStyle(context).copyWith(
-                      color: AppStyles.textLightColor,
-                    ),
+                    style: AppStyles.subtitleStyle(
+                      context,
+                    ).copyWith(color: AppStyles.textLightColor),
                   ),
                   const SizedBox(height: AppStyles.paddingSmall),
                   Text(
@@ -101,14 +101,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 direction: DismissDirection.endToStart,
                 background: Container(
                   alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.only(
-                    right: AppStyles.paddingLarge,
-                  ),
+                  padding: const EdgeInsets.only(right: AppStyles.paddingLarge),
                   color: AppStyles.errorColor,
-                  child: const Icon(
-                    Icons.delete,
-                    color: Colors.white,
-                  ),
+                  child: const Icon(Icons.delete, color: Colors.white),
                 ),
                 onDismissed: (direction) {
                   // Note: Individual delete not implemented in provider
@@ -120,13 +115,17 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     height: 48,
                     decoration: BoxDecoration(
                       color: isRead
-                          ? Theme.of(context).colorScheme.surfaceContainerHighest
+                          ? Theme.of(
+                              context,
+                            ).colorScheme.surfaceContainerHighest
                           : AppStyles.primaryColor.withOpacity(0.1),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
                       _getIconForType(type),
-                      color: isRead ? AppStyles.textLightColor : AppStyles.primaryColor,
+                      color: isRead
+                          ? AppStyles.textLightColor
+                          : AppStyles.primaryColor,
                     ),
                   ),
                   title: Text(
@@ -149,12 +148,33 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                             shape: BoxShape.circle,
                           ),
                         ),
-                  onTap: () {
+                  onTap: () async {
                     if (!isRead) {
-                      notifications.markAsRead(notification['id'] as int);
+                      await notifications.markAsRead(notification['id'] as int);
+                    }
+
+                    final type = notification['type'] as String;
+                    final data = notification['data'] as Map<String, dynamic>?;
+                    final orderId = data != null && data['orderId'] is int
+                        ? data['orderId'] as int
+                        : null;
+
+                    if (type == 'order') {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const AdminOrdersScreen(),
+                        ),
+                      );
+                    } else if (type == 'order_approved' ||
+                        type == 'order_rejected') {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => const OrdersScreen()),
+                      );
                     }
                   },
-                  tileColor: isRead ? null : AppStyles.primaryColor.withOpacity(0.05),
+                  tileColor: isRead
+                      ? null
+                      : AppStyles.primaryColor.withOpacity(0.05),
                 ),
               );
             },

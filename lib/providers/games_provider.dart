@@ -19,7 +19,7 @@ class GamesProvider extends ChangeNotifier {
 
   // Filters
   List<String> _selectedGenres = [];
-  String _sortBy = 'date'; // date, rating, alphabet
+  String _sortBy = 'none'; // none, date, rating, alphabet
   String _searchQuery = '';
 
   List<Game> get games => _filteredGames;
@@ -41,6 +41,15 @@ class GamesProvider extends ChangeNotifier {
     }
 
     if (!_hasMoreData && !refresh) return;
+
+    if (_currentPage == 0 && _games.isEmpty) {
+      final customGamesJson = await _storageService.getCustomGames();
+      final customGames = customGamesJson
+          .map((json) => Game.fromJson(json))
+          .where((game) => !game.isDeleted)
+          .toList();
+      _games.addAll(customGames);
+    }
 
     _isLoading = _currentPage == 0;
     _isLoadingMore = _currentPage > 0;
@@ -129,9 +138,22 @@ class GamesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setSearchQuery(String query) {
+  Future<void> setSearchQuery(String query) async {
     _searchQuery = query;
-    _applyFiltersAndSort();
+    if (query.isEmpty) {
+      _applyFiltersAndSort();
+    } else {
+      // Search across all games, not just loaded ones
+      final searchResults = await _apiService.searchGames(query);
+      _filteredGames = searchResults;
+      // Apply genre filter to search results
+      if (_selectedGenres.isNotEmpty) {
+        _filteredGames = _filteredGames
+            .where((game) => _selectedGenres.contains(game.genre))
+            .toList();
+      }
+      _applySorting();
+    }
     notifyListeners();
   }
 
@@ -145,15 +167,10 @@ class GamesProvider extends ChangeNotifier {
           .toList();
     }
 
-    // Apply search
-    if (_searchQuery.isNotEmpty) {
-      _filteredGames = _filteredGames
-          .where((game) =>
-              game.title.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-              game.genre.toLowerCase().contains(_searchQuery.toLowerCase()))
-          .toList();
-    }
+    _applySorting();
+  }
 
+  void _applySorting() {
     // Apply sorting
     switch (_sortBy) {
       case 'date':
@@ -164,6 +181,9 @@ class GamesProvider extends ChangeNotifier {
         break;
       case 'alphabet':
         _filteredGames.sort((a, b) => a.title.compareTo(b.title));
+        break;
+      case 'none':
+      default:
         break;
     }
   }

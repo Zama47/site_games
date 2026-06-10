@@ -56,8 +56,9 @@ class StorageService {
     final String? ratingsJson = prefs.getString(_ratingsKey);
     if (ratingsJson != null) {
       final Map<String, dynamic> decoded = json.decode(ratingsJson);
-      return decoded.map((key, value) =>
-          MapEntry(int.parse(key), (value as num).toDouble()));
+      return decoded.map(
+        (key, value) => MapEntry(int.parse(key), (value as num).toDouble()),
+      );
     }
     return {};
   }
@@ -66,8 +67,9 @@ class StorageService {
     final prefs = await _prefs;
     final ratings = await getRatings();
     ratings[gameId] = rating;
-    final encoded = ratings.map((key, value) =>
-        MapEntry(key.toString(), value));
+    final encoded = ratings.map(
+      (key, value) => MapEntry(key.toString(), value),
+    );
     await prefs.setString(_ratingsKey, json.encode(encoded));
   }
 
@@ -90,10 +92,7 @@ class StorageService {
   Future<void> addToTrash(Map<String, dynamic> game) async {
     final prefs = await _prefs;
     final deletedGames = await getDeletedGames();
-    deletedGames.add({
-      ...game,
-      'deletedAt': DateTime.now().toIso8601String(),
-    });
+    deletedGames.add({...game, 'deletedAt': DateTime.now().toIso8601String()});
     await prefs.setString(_deletedGamesKey, json.encode(deletedGames));
   }
 
@@ -152,7 +151,11 @@ class StorageService {
     return [];
   }
 
-  Future<void> addNotification(String message, String type) async {
+  Future<void> addNotification(
+    String message,
+    String type, {
+    Map<String, dynamic>? data,
+  }) async {
     final prefs = await _prefs;
     final notifications = await getNotifications();
     notifications.insert(0, {
@@ -161,6 +164,7 @@ class StorageService {
       'type': type,
       'timestamp': DateTime.now().toIso8601String(),
       'read': false,
+      'data': data ?? {},
     });
     // Keep only last 50 notifications
     if (notifications.length > 50) {
@@ -196,14 +200,14 @@ class StorageService {
     if (ordersJson != null) {
       final List<dynamic> decoded = json.decode(ordersJson);
       var orders = decoded.map((o) => Order.fromJson(o)).toList();
-      
+
       if (userId != null) {
         orders = orders.where((o) => o.userId == userId).toList();
       }
       if (status != null) {
         orders = orders.where((o) => o.status == status).toList();
       }
-      
+
       return orders;
     }
     return [];
@@ -213,10 +217,17 @@ class StorageService {
     final prefs = await _prefs;
     final orders = await getOrders();
     orders.add(order);
-    await prefs.setString(_ordersKey, json.encode(orders.map((o) => o.toJson()).toList()));
+    await prefs.setString(
+      _ordersKey,
+      json.encode(orders.map((o) => o.toJson()).toList()),
+    );
   }
 
-  Future<void> updateOrderStatus(int orderId, String status, {String? adminComment}) async {
+  Future<void> updateOrderStatus(
+    int orderId,
+    String status, {
+    String? adminComment,
+  }) async {
     final prefs = await _prefs;
     final orders = await getOrders();
     final index = orders.indexWhere((o) => o.id == orderId);
@@ -226,7 +237,10 @@ class StorageService {
         adminComment: adminComment,
         processedAt: DateTime.now(),
       );
-      await prefs.setString(_ordersKey, json.encode(orders.map((o) => o.toJson()).toList()));
+      await prefs.setString(
+        _ordersKey,
+        json.encode(orders.map((o) => o.toJson()).toList()),
+      );
     }
   }
 

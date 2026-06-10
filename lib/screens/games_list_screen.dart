@@ -119,15 +119,17 @@ class _GamesListScreenState extends State<GamesListScreen> {
                 suffixIcon: _searchController.text.isNotEmpty
                     ? IconButton(
                         icon: const Icon(Icons.clear),
-                        onPressed: () {
+                        onPressed: () async {
                           _searchController.clear();
-                          context.read<GamesProvider>().setSearchQuery('');
+                          await context.read<GamesProvider>().setSearchQuery(
+                            '',
+                          );
                         },
                       )
                     : null,
               ),
-              onChanged: (value) {
-                context.read<GamesProvider>().setSearchQuery(value);
+              onChanged: (value) async {
+                await context.read<GamesProvider>().setSearchQuery(value);
               },
             ),
           ),
@@ -135,12 +137,11 @@ class _GamesListScreenState extends State<GamesListScreen> {
             child: Consumer<GamesProvider>(
               builder: (context, gamesProvider, child) {
                 if (gamesProvider.isLoading && gamesProvider.games.isEmpty) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return const Center(child: CircularProgressIndicator());
                 }
 
-                if (gamesProvider.error != null && gamesProvider.games.isEmpty) {
+                if (gamesProvider.error != null &&
+                    gamesProvider.games.isEmpty) {
                   return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -186,9 +187,9 @@ class _GamesListScreenState extends State<GamesListScreen> {
                         const SizedBox(height: AppStyles.paddingMedium),
                         Text(
                           'Игры не найдены',
-                          style: AppStyles.subtitleStyle(context).copyWith(
-                            color: AppStyles.textLightColor,
-                          ),
+                          style: AppStyles.subtitleStyle(
+                            context,
+                          ).copyWith(color: AppStyles.textLightColor),
                         ),
                       ],
                     ),
@@ -197,16 +198,16 @@ class _GamesListScreenState extends State<GamesListScreen> {
 
                 return ListView.builder(
                   controller: _scrollController,
-                  itemCount: gamesProvider.games.length + (gamesProvider.hasMoreData ? 1 : 0),
+                  itemCount:
+                      gamesProvider.games.length +
+                      (gamesProvider.hasMoreData ? 1 : 0),
                   itemBuilder: (context, index) {
                     // Load more button at the end
                     if (index == gamesProvider.games.length) {
                       return Padding(
                         padding: const EdgeInsets.all(AppStyles.paddingMedium),
                         child: gamesProvider.isLoadingMore
-                            ? const Center(
-                                child: CircularProgressIndicator(),
-                              )
+                            ? const Center(child: CircularProgressIndicator())
                             : ElevatedButton.icon(
                                 onPressed: () {
                                   gamesProvider.loadMore();
@@ -219,7 +220,7 @@ class _GamesListScreenState extends State<GamesListScreen> {
                               ),
                       );
                     }
-                    
+
                     final game = gamesProvider.games[index];
                     return FutureBuilder<bool>(
                       future: gamesProvider.isFavorite(game.id),
@@ -282,10 +283,7 @@ class _GamesListScreenState extends State<GamesListScreen> {
                       ),
                     ),
                     const SizedBox(height: AppStyles.paddingLarge),
-                    Text(
-                      'Фильтры',
-                      style: AppStyles.headlineStyle(context),
-                    ),
+                    Text('Фильтры', style: AppStyles.headlineStyle(context)),
                     const SizedBox(height: AppStyles.paddingLarge),
                     Text(
                       'Жанры (выберите несколько)',
@@ -298,14 +296,15 @@ class _GamesListScreenState extends State<GamesListScreen> {
                           spacing: AppStyles.paddingSmall,
                           runSpacing: AppStyles.paddingSmall,
                           children: Game.availableGenres.map((genre) {
-                            final isSelected =
-                                gamesProvider.selectedGenres.contains(genre);
+                            final isSelected = gamesProvider.selectedGenres
+                                .contains(genre);
                             return FilterChip(
                               label: Text(genre),
                               selected: isSelected,
                               onSelected: (selected) {
-                                final newGenres =
-                                    List<String>.from(gamesProvider.selectedGenres);
+                                final newGenres = List<String>.from(
+                                  gamesProvider.selectedGenres,
+                                );
                                 if (selected) {
                                   newGenres.add(genre);
                                 } else {
@@ -313,7 +312,9 @@ class _GamesListScreenState extends State<GamesListScreen> {
                                 }
                                 gamesProvider.setGenreFilter(newGenres);
                               },
-                              selectedColor: AppStyles.primaryColor.withOpacity(0.2),
+                              selectedColor: AppStyles.primaryColor.withOpacity(
+                                0.2,
+                              ),
                               checkmarkColor: AppStyles.primaryColor,
                             );
                           }).toList(),
@@ -330,6 +331,19 @@ class _GamesListScreenState extends State<GamesListScreen> {
                       builder: (context, gamesProvider, child) {
                         return Column(
                           children: [
+                            RadioListTile<String>(
+                              title: const Text(
+                                'Без сортировки (порядок загрузки)',
+                              ),
+                              value: 'none',
+                              groupValue: gamesProvider.sortBy,
+                              onChanged: (value) {
+                                if (value != null) {
+                                  gamesProvider.setSortBy(value);
+                                }
+                              },
+                              activeColor: AppStyles.primaryColor,
+                            ),
                             RadioListTile<String>(
                               title: const Text('По дате выхода (новые)'),
                               value: 'date',
@@ -373,7 +387,7 @@ class _GamesListScreenState extends State<GamesListScreen> {
                       child: ElevatedButton(
                         onPressed: () {
                           context.read<GamesProvider>().setGenreFilter([]);
-                          context.read<GamesProvider>().setSortBy('date');
+                          context.read<GamesProvider>().setSortBy('none');
                           Navigator.pop(context);
                         },
                         style: ElevatedButton.styleFrom(
@@ -393,10 +407,8 @@ class _GamesListScreenState extends State<GamesListScreen> {
   }
 
   void _navigateToEdit(BuildContext context, Game game) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => GameFormScreen(game: game),
-      ),
-    );
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => GameFormScreen(game: game)));
   }
 }

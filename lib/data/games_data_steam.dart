@@ -8,12 +8,14 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "id": 1,
     "title": "The Witcher 3: Wild Hunt",
     "genre": "RPG",
-    "description": "Игра в жанре action/RPG, разработанная польской студией CD Projekt RED.",
+    "description":
+        "Игра в жанре action/RPG, разработанная польской студией CD Projekt RED.",
     "releaseDate": "2015-05-19",
     "rating": 9.8,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg",
     "developer": "CD Projekt RED",
-    "platforms": ["PC","PlayStation","Xbox","Nintendo Switch"],
+    "platforms": ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=c0i88tKf4SM",
@@ -22,19 +24,21 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/292030/ss_0901e64e9d4b8ebaea8348c194e7a3644d2d832d.1920x1080.jpg?t=1768303991",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/292030/ss_112b1e176c1bd271d8a565eacb6feaf90f240bb2.1920x1080.jpg?t=1768303991",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/292030/ss_d1b73b18cbcd5e9e412c7a1dead3c5cd7303d2ad.1920x1080.jpg?t=1768303991",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.1920x1080.jpg?t=1768303991"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/292030/ss_107600c1337accc09104f7a8aa7f275f23cad096.1920x1080.jpg?t=1768303991",
+    ],
   },
   {
     "id": 2,
     "title": "Cyberpunk 2077",
     "genre": "RPG",
-    "description": "Футуристическая ролевая игра в открытом мире от создателей Ведьмака 3.",
+    "description":
+        "Футуристическая ролевая игра в открытом мире от создателей Ведьмака 3.",
     "releaseDate": "2020-12-10",
     "rating": 9.0,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg",
     "developer": "CD Projekt RED",
-    "platforms": ["PC","PlayStation","Xbox"],
+    "platforms": ["PC", "PlayStation", "Xbox"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=8X2kIfS6fb8",
@@ -43,19 +47,21 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/ss_0e64170751e1ae20ff8fdb7001a8892fd48260e7.1920x1080.jpg?t=1769690377",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/ss_af2804aa4bf35d4251043744412ce3b359a125ef.1920x1080.jpg?t=1769690377",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/ss_7924f64b6e5d586a80418c9896a1c92881a7905b.1920x1080.jpg?t=1769690377",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/ss_4eb068b1cf52c91b57157b84bed18a186ed7714b.1920x1080.jpg?t=1769690377"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/ss_4eb068b1cf52c91b57157b84bed18a186ed7714b.1920x1080.jpg?t=1769690377",
+    ],
   },
   {
     "id": 3,
     "title": "Grand Theft Auto V",
     "genre": "Action",
-    "description": "Эпическая приключенческая игра в открытом мире от Rockstar Games.",
+    "description":
+        "Эпическая приключенческая игра в открытом мире от Rockstar Games.",
     "releaseDate": "2013-09-17",
     "rating": 9.5,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg",
     "developer": "Rockstar Games",
-    "platforms": ["PC","PlayStation","Xbox"],
+    "platforms": ["PC", "PlayStation", "Xbox"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=QkkoHAzjnUs",
@@ -64,8 +70,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/271590/ss_2744f112fa060320d191a50e8b3a92441a648a56.1920x1080.jpg?t=1765387725",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/271590/ss_da39c16db175f6973770bae6b91d411251763152.1920x1080.jpg?t=1765387725",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/271590/ss_bd5db78286be0a7c6b2c62519099a9e27e6b06f3.1920x1080.jpg?t=1765387725",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/271590/ss_b1a1cb7959d6a0e6fcb2d06ebf97a66c9055cef3.1920x1080.jpg?t=1765387725"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/271590/ss_b1a1cb7959d6a0e6fcb2d06ebf97a66c9055cef3.1920x1080.jpg?t=1765387725",
+    ],
   },
   {
     "id": 4,
@@ -74,9 +80,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Эпическая сага о Диком Западе от Rockstar Games.",
     "releaseDate": "2018-10-26",
     "rating": 9.7,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg",
     "developer": "Rockstar Games",
-    "platforms": ["PC","PlayStation","Xbox"],
+    "platforms": ["PC", "PlayStation", "Xbox"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=eaW0tYpxyp0",
@@ -85,8 +92,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/ss_bac60bacbf5da8945103648c08d27d5e202444ca.1920x1080.jpg?t=1759502961",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/ss_668dafe477743f8b50b818d5bbfcec669e9ba93e.1920x1080.jpg?t=1759502961",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/ss_4ce07ae360b166f0f650e9a895a3b4b7bf15e34f.1920x1080.jpg?t=1759502961",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/ss_d1a8f5a69155c3186c65d1da90491fcfd43663d9.1920x1080.jpg?t=1759502961"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/ss_d1a8f5a69155c3186c65d1da90491fcfd43663d9.1920x1080.jpg?t=1759502961",
+    ],
   },
   {
     "id": 5,
@@ -95,9 +102,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Фэнтезийная action/RPG от FromSoftware и Джорджа Мартина.",
     "releaseDate": "2022-02-25",
     "rating": 9.6,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg",
     "developer": "FromSoftware",
-    "platforms": ["PC","PlayStation","Xbox"],
+    "platforms": ["PC", "PlayStation", "Xbox"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=E3Huy2cdih0",
@@ -106,8 +114,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/ss_dcdac9e4b26ac0ee5248bfd2967d764fd00cdb42.1920x1080.jpg?t=1767883716",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/ss_3c41384a24d86dddd58a8f61db77f9dc0bfda8b5.1920x1080.jpg?t=1767883716",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/ss_e0316c76f8197405c1312d072b84331dd735d60b.1920x1080.jpg?t=1767883716",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/ss_ef61b771ee6b269b1f0cb484233e07a0bfb5f81b.1920x1080.jpg?t=1767883716"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/ss_ef61b771ee6b269b1f0cb484233e07a0bfb5f81b.1920x1080.jpg?t=1767883716",
+    ],
   },
   {
     "id": 6,
@@ -116,9 +124,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Продолжение эпического приключения Кратоса и Атрея.",
     "releaseDate": "2022-01-14",
     "rating": 9.4,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/1593500/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/1593500/header.jpg",
     "developer": "Santa Monica Studio",
-    "platforms": ["PC","PlayStation"],
+    "platforms": ["PC", "PlayStation"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=0-3dJv_tq68",
@@ -127,8 +136,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1593500/ss_f1bff24d3967a21d303d95e11ed892e3d9113057.1920x1080.jpg?t=1763059412",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1593500/ss_3670ba72c7e3e9c3c3225547ef2c1053504e62b8.1920x1080.jpg?t=1763059412",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1593500/ss_93a3ca63aa2cd8c675bbb6430324ee3f2d44b845.1920x1080.jpg?t=1763059412",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1593500/ss_1bd99270dcbd4ff9fe9c94b0d9c8ffc50ebb42c7.1920x1080.jpg?t=1763059412"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1593500/ss_1bd99270dcbd4ff9fe9c94b0d9c8ffc50ebb42c7.1920x1080.jpg?t=1763059412",
+    ],
   },
   {
     "id": 7,
@@ -137,9 +146,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Приключения Элой в постапокалиптическом мире.",
     "releaseDate": "2020-08-07",
     "rating": 9.0,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/header.jpg",
     "developer": "Guerrilla Games",
-    "platforms": ["PC","PlayStation"],
+    "platforms": ["PC", "PlayStation"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=UcJ2liVpKiw",
@@ -148,8 +158,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1151640/ss_271f850eec3f96b22aa17be35b948268e0771c7f.1920x1080.jpg?t=1776465788",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1151640/ss_15f5759c441e4e5f51e1a8ee333e4ab9df9aa783.1920x1080.jpg?t=1776465788",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1151640/ss_f7cf51f1ccd909264f2c5814f328e3f72e7b62bd.1920x1080.jpg?t=1776465788",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1151640/ss_9db45aa04e8c8b5043b479f42ed36296bfc3a918.1920x1080.jpg?t=1776465788"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1151640/ss_9db45aa04e8c8b5043b479f42ed36296bfc3a918.1920x1080.jpg?t=1776465788",
+    ],
   },
   {
     "id": 8,
@@ -158,9 +168,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Современный шутер от первого лица с напряжённым сюжетом.",
     "releaseDate": "2022-10-28",
     "rating": 8.5,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/1938090/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/1938090/header.jpg",
     "developer": "Infinity Ward",
-    "platforms": ["PC","PlayStation","Xbox"],
+    "platforms": ["PC", "PlayStation", "Xbox"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=OeVapCrN6I8",
@@ -169,8 +180,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1938090/6781fd040d6b20a45602b316cabc65720ae63d1f/ss_6781fd040d6b20a45602b316cabc65720ae63d1f.1920x1080.jpg?t=1775145994",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1938090/e70521017a69590d0ae490558e7c0c316d153701/ss_e70521017a69590d0ae490558e7c0c316d153701.1920x1080.jpg?t=1775145994",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1938090/ac2402cb806a974535c32f2f9969f1790d47d039/ss_ac2402cb806a974535c32f2f9969f1790d47d039.1920x1080.jpg?t=1775145994",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1938090/c805f95815551c4d9228be054e1a7982210e4698/ss_c805f95815551c4d9228be054e1a7982210e4698.1920x1080.jpg?t=1775145994"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1938090/c805f95815551c4d9228be054e1a7982210e4698/ss_c805f95815551c4d9228be054e1a7982210e4698.1920x1080.jpg?t=1775145994",
+    ],
   },
   {
     "id": 9,
@@ -179,9 +190,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Бесплатная королевская битва от Respawn Entertainment.",
     "releaseDate": "2020-11-04",
     "rating": 9.0,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172470/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/1172470/header.jpg",
     "developer": "Respawn Entertainment",
-    "platforms": ["PC","PlayStation","Xbox","Nintendo Switch"],
+    "platforms": ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
     "status": "Released",
     "isFree": true,
     "trailerUrl": "https://www.youtube.com/watch?v=oQtHENM_GrE",
@@ -190,8 +202,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172470/f786d0d1e567be0e5a801a62855970f9b6bae6fd/ss_f786d0d1e567be0e5a801a62855970f9b6bae6fd.1920x1080.jpg?t=1770753360",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172470/c1f5eb613c365fc96f5d59dd69bd852793929f69/ss_c1f5eb613c365fc96f5d59dd69bd852793929f69.1920x1080.jpg?t=1770753360",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172470/3424111e83c2adfc7e6c056573d5089c27fdc711/ss_3424111e83c2adfc7e6c056573d5089c27fdc711.1920x1080.jpg?t=1770753360",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172470/339c1a98c4ae3a6d662e2766cad9660c3ca8f8aa/ss_339c1a98c4ae3a6d662e2766cad9660c3ca8f8aa.1920x1080.jpg?t=1770753360"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172470/339c1a98c4ae3a6d662e2766cad9660c3ca8f8aa/ss_339c1a98c4ae3a6d662e2766cad9660c3ca8f8aa.1920x1080.jpg?t=1770753360",
+    ],
   },
   {
     "id": 10,
@@ -200,9 +212,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Приключения Питера Паркера в Нью-Йорке.",
     "releaseDate": "2022-08-12",
     "rating": 9.3,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg",
     "developer": "Insomniac Games",
-    "platforms": ["PC","PlayStation"],
+    "platforms": ["PC", "PlayStation"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=6ZsVz-r7m_k",
@@ -211,8 +224,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1817070/ss_427677cf78195df94702f0a963cd9eaeb9d8935a.1920x1080.jpg?t=1763569047",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1817070/ss_dfba6f2477bfa42be69ddfdffbd421d3943d20bf.1920x1080.jpg?t=1763569047",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1817070/ss_5b5448df07bc74ba236f2c007fd0ec19cc1d22b6.1920x1080.jpg?t=1763569047",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1817070/ss_ad14a7daa190cb150fbb070afc70bc64d66a5e2e.1920x1080.jpg?t=1763569047"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1817070/ss_ad14a7daa190cb150fbb070afc70bc64d66a5e2e.1920x1080.jpg?t=1763569047",
+    ],
   },
   {
     "id": 11,
@@ -221,9 +234,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Полный ремейк классического хоррора.",
     "releaseDate": "2023-03-24",
     "rating": 9.4,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg",
     "developer": "Capcom",
-    "platforms": ["PC","PlayStation","Xbox"],
+    "platforms": ["PC", "PlayStation", "Xbox"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=IdZb2pN1778",
@@ -232,8 +246,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2050650/ss_ab807f8ad9e968a620777caf483cb6020367b9ee.1920x1080.jpg?t=1772502922",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2050650/ss_0442f7fb4327d79802c2db8ea8d23d228a28d896.1920x1080.jpg?t=1772502922",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2050650/ss_69810f4cd155912fdfdd21da70181df7d454c874.1920x1080.jpg?t=1772502922",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2050650/ss_0596bac955340495562f3ff2538756ebd9a7f073.1920x1080.jpg?t=1772502922"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2050650/ss_0596bac955340495562f3ff2538756ebd9a7f073.1920x1080.jpg?t=1772502922",
+    ],
   },
   {
     "id": 12,
@@ -242,9 +256,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Новая глава легендарной fighting-серии.",
     "releaseDate": "2023-06-02",
     "rating": 9.0,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/1364780/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/1364780/header.jpg",
     "developer": "Capcom",
-    "platforms": ["PC","PlayStation","Xbox"],
+    "platforms": ["PC", "PlayStation", "Xbox"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=3b4g1y61AM8",
@@ -253,8 +268,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1364780/ss_a381f1b3b450c18900d47b991ce8e7456e9cdba5.1920x1080.jpg?t=1773812087",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1364780/ss_f62ce93269a6d8e0027853358af4d6368e2c4b93.1920x1080.jpg?t=1773812087",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1364780/ss_d186566a92ada8cdb08b04769a8c95cd1e380006.1920x1080.jpg?t=1773812087",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1364780/ss_ed46aaa9ed94dd6f35a703070f8df16cee5aef61.1920x1080.jpg?t=1773812087"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1364780/ss_ed46aaa9ed94dd6f35a703070f8df16cee5aef61.1920x1080.jpg?t=1773812087",
+    ],
   },
   {
     "id": 13,
@@ -263,9 +278,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Ролевая игра во вселенной Гарри Поттера.",
     "releaseDate": "2023-02-10",
     "rating": 8.8,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/header.jpg",
     "developer": "Avalanche Software",
-    "platforms": ["PC","PlayStation","Xbox","Nintendo Switch"],
+    "platforms": ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=1O6Q81nJz2o",
@@ -274,8 +290,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/990080/ss_df93b5e8a183f7232d68be94ae78920a90de1443.1920x1080.jpg?t=1773932856",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/990080/ss_94058497bf0f8fabdde17ee8d59bece609a60663.1920x1080.jpg?t=1773932856",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/990080/ss_8e08976236d29b1897769257ac3c64e9264792a5.1920x1080.jpg?t=1773932856",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/990080/ss_d4930d675af053dc1e61a876a34fc003e85e261f.1920x1080.jpg?t=1773932856"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/990080/ss_d4930d675af053dc1e61a876a34fc003e85e261f.1920x1080.jpg?t=1773932856",
+    ],
   },
   {
     "id": 14,
@@ -284,9 +300,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Полный ремейк культового sci-fi хоррора.",
     "releaseDate": "2023-01-27",
     "rating": 9.0,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/1693980/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/1693980/header.jpg",
     "developer": "Motive Studio",
-    "platforms": ["PC","PlayStation","Xbox"],
+    "platforms": ["PC", "PlayStation", "Xbox"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=colJ3D9V6cE",
@@ -295,8 +312,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1693980/ss_179cb4f80343d464ea2d7712b5982555271ad707.1920x1080.jpg?t=1769464545",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1693980/ss_06f8cc8ad27e53078b09df03c5c3fb1c75459960.1920x1080.jpg?t=1769464545",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1693980/ss_a7a0bceba764978d54ff0bb7ba0f0aa08487cd05.1920x1080.jpg?t=1769464545",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1693980/ss_973768134ba80cf0d591a4f0a834b8ae10ddca93.1920x1080.jpg?t=1769464545"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1693980/ss_973768134ba80cf0d591a4f0a834b8ae10ddca93.1920x1080.jpg?t=1769464545",
+    ],
   },
   {
     "id": 15,
@@ -305,9 +322,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Эпическая ролевая игра по мотивам Dungeons & Dragons.",
     "releaseDate": "2023-08-03",
     "rating": 9.8,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg",
     "developer": "Larian Studios",
-    "platforms": ["PC","PlayStation","Xbox"],
+    "platforms": ["PC", "PlayStation", "Xbox"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=OiC5rxANBjk",
@@ -316,8 +334,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/ss_73d93bea842b93914d966622104dcb8c0f42972b.1920x1080.jpg?t=1773079016",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/ss_cf936d31061b58e98e0c646aee00e6030c410cda.1920x1080.jpg?t=1773079016",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/ss_b6a6ee6e046426d08ceea7a4506a1b5f44181543.1920x1080.jpg?t=1773079016",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/ss_6b8faba0f6831a406ce015648958da9612d14dbb.1920x1080.jpg?t=1773079016"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/ss_6b8faba0f6831a406ce015648958da9612d14dbb.1920x1080.jpg?t=1773079016",
+    ],
   },
   {
     "id": 16,
@@ -326,9 +344,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Эпическая научно-фантастическая RPG от Bethesda.",
     "releaseDate": "2023-09-06",
     "rating": 8.0,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/1716740/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/1716740/header.jpg",
     "developer": "Bethesda Game Studios",
-    "platforms": ["PC","Xbox"],
+    "platforms": ["PC", "Xbox"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=zmb2FJKvn8U",
@@ -337,8 +356,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1716740/ss_b2821283cb140cd5a6289a8160016b6a60d8f96e.1920x1080.jpg?t=1775743548",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1716740/ss_68f15d580bf91971f637be5e464bc803482d78f7.1920x1080.jpg?t=1775743548",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1716740/ss_aae99c177004bb5ec653d2fcb65a5d30489ec7b8.1920x1080.jpg?t=1775743548",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1716740/ss_c8594798fadfd8e042b2fc8afff7bcf4872c5198.1920x1080.jpg?t=1775743548"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1716740/ss_c8594798fadfd8e042b2fc8afff7bcf4872c5198.1920x1080.jpg?t=1775743548",
+    ],
   },
   {
     "id": 17,
@@ -347,9 +366,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Кооперативное приключение для двух игроков.",
     "releaseDate": "2021-03-26",
     "rating": 9.5,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/1426210/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/1426210/header.jpg",
     "developer": "Hazelight Studios",
-    "platforms": ["PC","PlayStation","Xbox"],
+    "platforms": ["PC", "PlayStation", "Xbox"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=ohClxMm-uR0",
@@ -358,8 +378,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1426210/ss_6e987a0678b013bfd0073a9ac4703e1f04ca4dea.1920x1080.jpg?t=1763484491",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1426210/ss_fdac523e3ea4d2f32a44449bb8c224857563bd7d.1920x1080.jpg?t=1763484491",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1426210/ss_4a62bc8fa398fc5b2094a6225dc5ecff9485f824.1920x1080.jpg?t=1763484491",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1426210/ss_a15164ddd357ab3c0b2aff575a6b215b2d91b406.1920x1080.jpg?t=1763484491"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1426210/ss_a15164ddd357ab3c0b2aff575a6b215b2d91b406.1920x1080.jpg?t=1763484491",
+    ],
   },
   {
     "id": 18,
@@ -368,9 +388,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Культовый рогалик от Supergiant Games.",
     "releaseDate": "2020-09-17",
     "rating": 9.5,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/1145360/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/1145360/header.jpg",
     "developer": "Supergiant Games",
-    "platforms": ["PC","PlayStation","Xbox","Nintendo Switch"],
+    "platforms": ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=91t0BX9w6wE",
@@ -379,8 +400,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1145360/ss_8a9f0953e8a014bd3df2789c2835cb787cd3764d.1920x1080.jpg?t=1758127023",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1145360/ss_68300459a8c3daacb2ec687adcdbf4442fcc4f47.1920x1080.jpg?t=1758127023",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1145360/ss_bcb499a0dd001f4101823f99ec5094d2872ba6ee.1920x1080.jpg?t=1758127023",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1145360/ss_8e07e477fa7ff2f88c8984bc89b9652a655da0e9.1920x1080.jpg?t=1758127023"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1145360/ss_8e07e477fa7ff2f88c8984bc89b9652a655da0e9.1920x1080.jpg?t=1758127023",
+    ],
   },
   {
     "id": 19,
@@ -389,9 +410,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Уютная фермерская симуляция с элементами RPG.",
     "releaseDate": "2016-02-26",
     "rating": 9.3,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/413150/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/413150/header.jpg",
     "developer": "ConcernedApe",
-    "platforms": ["PC","PlayStation","Xbox","Nintendo Switch","Mobile"],
+    "platforms": ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=ot7uXNQYbYc",
@@ -400,8 +422,8 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/413150/ss_9ac899fe2cda15d48b0549bba77ef8c4a090a71c.1920x1080.jpg?t=1754692865",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/413150/ss_4fa0866709ede3753fdf2745349b528d5e8c4054.1920x1080.jpg?t=1754692865",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/413150/ss_d836f0a5b0447fb6a2bdb0a6ac5f954949d3c41e.1920x1080.jpg?t=1754692865",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/413150/ss_10628b4a811c0a925a1433d4323f78c7017dbbe4.1920x1080.jpg?t=1754692865"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/413150/ss_10628b4a811c0a925a1433d4323f78c7017dbbe4.1920x1080.jpg?t=1754692865",
+    ],
   },
   {
     "id": 20,
@@ -410,9 +432,10 @@ const List<Map<String, dynamic>> gamesSteamData = [
     "description": "Метроидвания с уникальным арт-стилем.",
     "releaseDate": "2017-02-24",
     "rating": 9.4,
-    "imageUrl": "https://cdn.cloudflare.steamstatic.com/steam/apps/367520/header.jpg",
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/367520/header.jpg",
     "developer": "Team Cherry",
-    "platforms": ["PC","PlayStation","Xbox","Nintendo Switch"],
+    "platforms": ["PC", "PlayStation", "Xbox", "Nintendo Switch"],
     "status": "Released",
     "isFree": false,
     "trailerUrl": "https://www.youtube.com/watch?v=UAO2urG23S4",
@@ -421,7 +444,116 @@ const List<Map<String, dynamic>> gamesSteamData = [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/ss_d5b6edd94e77ba6db31c44d8a3c09d807ab27751.1920x1080.jpg?t=1776125684",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/ss_a81e4231cc8d55f58b51a4a938898af46503cae5.1920x1080.jpg?t=1776125684",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/ss_62e10cf506d461e11e050457b08aa0e2a1c078d0.1920x1080.jpg?t=1776125684",
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/ss_bd76bd88bc5334ee56ae3d5f0d8dec4455e8e3b8.1920x1080.jpg?t=1776125684"
-    ]
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/ss_bd76bd88bc5334ee56ae3d5f0d8dec4455e8e3b8.1920x1080.jpg?t=1776125684",
+    ],
+  },
+  {
+    "id": 21,
+    "title": "Terraria",
+    "genre": "Adventure",
+    "description":
+        "Песочница-приключение с исследованием, строительством и монстрами.",
+    "releaseDate": "2011-05-16",
+    "rating": 9.2,
+    "imageUrl":
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/105600/header.jpg?t=1769844435",
+    "developer": "Re-Logic",
+    "platforms": ["PC", "PlayStation", "Xbox", "Nintendo Switch", "Mobile"],
+    "status": "Released",
+    "isFree": false,
+    "trailerUrl": "https://www.youtube.com/watch?v=UAUdbdRK0hg",
+    "screenshots": [
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/105600/ss_8c03886f214d2108cafca13845533eaa3d87d83f.1920x1080.jpg?t=1769844435",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/105600/ss_ae168a00ab08104ba266dc30232654d4b3c919e5.1920x1080.jpg?t=1769844435",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/105600/ss_9edd98caaf9357c2f40758f354475a56e356e8b0.1920x1080.jpg?t=1769844435",
+    ],
+  },
+  {
+    "id": 22,
+    "title": "Кужлевка",
+    "genre": "Adventure",
+    "description":
+        "Атмосферная инди-приключенческая игра с мистическим сюжетом.",
+    "releaseDate": "2024-09-01",
+    "rating": 8.1,
+    "imageUrl":
+        "https://images.unsplash.com/photo-1526045612212-70caf35c14df?w=1200&q=90",
+    "developer": "Kužlevka Studio",
+    "platforms": ["PC"],
+    "status": "Released",
+    "isFree": false,
+    "trailerUrl": "https://www.youtube.com/watch?v=oL7xyarLInE",
+    "screenshots": [
+      "https://images.unsplash.com/photo-1526045612212-70caf35c14df?w=1920&q=90",
+      "https://images.unsplash.com/photo-1516035069371-29a1b15836e5?w=1920&q=90",
+      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1920&q=90",
+      "https://images.unsplash.com/photo-1512813382943-6ca242c6f765?w=1920&q=90",
+      "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1920&q=90",
+    ],
+  },
+  {
+    "id": 23,
+    "title": "Heavy Rain",
+    "genre": "Adventure",
+    "description":
+        "Интерактивный триллер от Quantic Dream с драматичным сюжетом и несколькими концовками.",
+    "releaseDate": "2019-06-18",
+    "rating": 8.8,
+    "imageUrl":
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960910/header.jpg?t=1675271942",
+    "developer": "Quantic Dream",
+    "platforms": ["PC"],
+    "status": "Released",
+    "isFree": false,
+    "trailerUrl": "https://www.youtube.com/watch?v=e4NvqmZ_SiE",
+    "screenshots": [
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960910/ss_d7ed4a5e3d155e23331902909f56f90c752c3643.1920x1080.jpg?t=1675271942",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960910/ss_f123d7bbd8c3e55ad42b3048be0d9685cab4bc6a.1920x1080.jpg?t=1675271942",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960910/ss_7cbb3063e3473239471d26fb54a5511e5a30ef3d.1920x1080.jpg?t=1675271942",
+    ],
+  },
+  {
+    "id": 24,
+    "title": "Beyond: Two Souls",
+    "genre": "Adventure",
+    "description":
+        "Эмоциональная драматическая история с элементами сверхъестественного от Quantic Dream.",
+    "releaseDate": "2019-11-26",
+    "rating": 8.6,
+    "imageUrl":
+        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960990/header.jpg?t=1667468566",
+    "developer": "Quantic Dream",
+    "platforms": ["PC"],
+    "status": "Released",
+    "isFree": false,
+    "trailerUrl": "https://www.youtube.com/watch?v=G4keuTrVO5g",
+    "screenshots": [
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960990/ss_5da0bcf3be8205d656c271217ead8f0190bd5234.1920x1080.jpg?t=1667468566",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960990/ss_d278c24710d2ef6ae168a9c79fd7ba0b993131b1.1920x1080.jpg?t=1667468566",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960990/ss_0e78f46846210c76d6d0f85364dc61ab147bb87b.1920x1080.jpg?t=1667468566",
+    ],
+  },
+  {
+    "id": 25,
+    "title": "Detroit: Become Human",
+    "genre": "Adventure",
+    "description":
+        "Футуристический триллер с несколькими развилками сюжета от Quantic Dream.",
+    "releaseDate": "2020-12-12",
+    "rating": 8.7,
+    "imageUrl":
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/1222140/header.jpg",
+    "developer": "Quantic Dream",
+    "platforms": ["PC"],
+    "status": "Released",
+    "isFree": false,
+    "trailerUrl": "https://www.youtube.com/watch?v=srqXXdP5dT0",
+    "screenshots": [
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222140/ss_a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222140/ss_b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222140/ss_c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222140/ss_d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8.1920x1080.jpg",
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222140/ss_e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9.1920x1080.jpg",
+    ],
   },
 ];

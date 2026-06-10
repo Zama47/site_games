@@ -62,45 +62,56 @@ class OrdersProvider extends ChangeNotifier {
     );
 
     await _storageService.saveOrder(order);
-    
+
     // Add notification for admin
     await _storageService.addNotification(
       'Новый заказ на игру "$gameTitle" от $userName',
       'order',
+      data: {'orderId': order.id},
     );
-    
+
     await loadOrders(userId: userId);
   }
 
   Future<void> approveOrder(int orderId, {String? adminComment}) async {
-    await _storageService.updateOrderStatus(orderId, 'approved', adminComment: adminComment);
-    
+    await _storageService.updateOrderStatus(
+      orderId,
+      'approved',
+      adminComment: adminComment,
+    );
+
     // Get order details for notification
     final allOrders = await _storageService.getOrders();
     final order = allOrders.firstWhere((o) => o.id == orderId);
-    
+
     // Add notification for user
     await _storageService.addNotification(
       'Ваш заказ на "${order.gameTitle}" одобрен!',
       'order_approved',
+      data: {'orderId': orderId},
     );
-    
+
     await loadPendingOrders();
   }
 
   Future<void> rejectOrder(int orderId, {String? adminComment}) async {
-    await _storageService.updateOrderStatus(orderId, 'rejected', adminComment: adminComment);
-    
+    await _storageService.updateOrderStatus(
+      orderId,
+      'rejected',
+      adminComment: adminComment,
+    );
+
     // Get order details for notification
     final allOrders = await _storageService.getOrders();
     final order = allOrders.firstWhere((o) => o.id == orderId);
-    
+
     // Add notification for user
     await _storageService.addNotification(
       'Ваш заказ на "${order.gameTitle}" отклонен',
       'order_rejected',
+      data: {'orderId': orderId},
     );
-    
+
     await loadPendingOrders();
   }
 

@@ -4,6 +4,7 @@ import '../providers/auth_provider.dart';
 import '../styles/app_styles.dart';
 import '../widgets/animated_app_logo.dart';
 import 'games_list_screen.dart';
+import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -179,6 +180,19 @@ class _LoginScreenState extends State<LoginScreen>
                                 );
                               },
                             ),
+                          ),
+                          const SizedBox(height: AppStyles.paddingSmall),
+                          TextButton(
+                            onPressed: () async {
+                              final result = await Navigator.of(context).push(
+                                MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                              );
+                              if (result != null && result is Map<String, String>) {
+                                _usernameController.text = result['username'] ?? '';
+                                _passwordController.text = result['password'] ?? '';
+                              }
+                            },
+                            child: const Text('Регистрация'),
                           ),
                           const SizedBox(height: AppStyles.paddingLarge),
                           Container(
