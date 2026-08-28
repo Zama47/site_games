@@ -79,6 +79,9 @@ Game Studio Catalog — это курсовой проект на Flutter/Dart, 
 - `blocked_users` — список заблокированных пользователей.
 - `current_user` — сохранённая сессия текущего пользователя.
 
+<img width="973" height="1152" alt="image" src="https://github.com/user-attachments/assets/2f44b956-5424-40c5-961d-4ed6d02838fb" />
+
+
 ### Пример структуры JSON игры
 
 ```json
@@ -137,14 +140,28 @@ if (response.statusCode == 200) {
 ### Основные экраны
 
 - `LoginScreen` — вход пользователя
+  <img width="652" height="1457" alt="image" src="https://github.com/user-attachments/assets/3e1ad860-33af-4823-a0df-06acac7a0cd1" />
+
+
 - `GamesListScreen` — главный каталог с поиском, фильтрами и кнопкой «Загрузить ещё»
+  <img width="621" height="1389" alt="image" src="https://github.com/user-attachments/assets/2c8c1dc0-41bd-4218-9295-0cd5f072c19c" />
+
+  
 - `GameDetailScreenNew` — детальная страница игры с рейтингом и трейлером
-- `FavoritesScreen` — экран избранного
+  <img width="627" height="1402" alt="image" src="https://github.com/user-attachments/assets/f3d4b91d-e502-48c2-a761-a2175fecfbd5" />
+
+  
+- `SideNavigationWindow` — Боковое навигационное меню
+  <img width="646" height="1445" alt="image" src="https://github.com/user-attachments/assets/2d85e928-6c76-44c7-abc2-083336e65758" />
+
+  
 - `OrdersScreen` — создание и просмотр заказов игроком
+  <img width="634" height="1417" alt="image" src="https://github.com/user-attachments/assets/fb11604b-7475-427c-a7e5-211b16cfab67" />
+
+
 - `AdminOrdersScreen` — просмотр и подтверждение заказов администратором
-- `AdminUsersScreen` — блокировка / разблокировка пользователей
-- `TrashScreen` — восстановление или окончательное удаление игр
-- `NotificationsScreen` — список уведомлений
+  <img width="653" height="1460" alt="image" src="https://github.com/user-attachments/assets/ef548f4f-3a73-4a7c-9967-2e8febce3d83" />
+
 
 ### Типы форм / диалогов
 
