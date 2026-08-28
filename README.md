@@ -12,6 +12,10 @@ Game Studio Catalog — это курсовой проект на Flutter/Dart, 
 
 ### 1.1 Архитектура
 
+[![Flutter](https://img.shields.io/badge/Flutter-3.22.0-blue.svg)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-3.4.0-blue.svg)](https://dart.dev)
+[![Provider](https://img.shields.io/badge/Provider-6.1.1-green.svg)](https://pub.dev/packages/provider)
+
 Приложение построено по архитектуре MVVM-подобного разделения:
 
 - `models/` — описывает сущности `Game`, `User`, `Order`.
