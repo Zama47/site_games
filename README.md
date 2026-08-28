@@ -1,5 +1,9 @@
 # Game Studio Catalog
 
+
+<img width="645" height="1442" alt="image" src="https://github.com/user-attachments/assets/d214b982-cc21-4ef4-aa4d-6737bb4b6296" />
+
+
 ## Описание проекта
 
 Game Studio Catalog — это курсовой проект на Flutter/Dart, реализующий каталог игр с пользовательской и административной ролями. Приложение показывает список игр, хранит избранное, ведёт заказную систему и уведомления, а также сохраняет данные локально в `shared_preferences`.
